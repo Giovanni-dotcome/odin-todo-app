@@ -4,7 +4,7 @@ import { v4 } from 'uuid';  // Use a library to generate UUIDs
 
 const Project = (title: string): IProject => {
     const id = v4();
-    let todos: ITodo[] | null = null;
+    let todos: ITodo[] = [];
 
     return {
         getId() {
@@ -16,7 +16,7 @@ const Project = (title: string): IProject => {
         setTitle(newTitle: string) {
             title = newTitle;
         },
-        getTodos(): ITodo[] | null {
+        getTodos(): ITodo[] {
             return todos;
         },
         deleteTodo(todoId: string) {
@@ -24,7 +24,7 @@ const Project = (title: string): IProject => {
             todos = todos.filter(todo => todo.getId() !== todoId)
         },
         addTodo(todo: ITodo) {
-            todos?.push(todo);
+            todos.push(todo);
         }
     }
 }

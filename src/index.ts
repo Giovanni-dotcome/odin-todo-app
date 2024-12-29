@@ -7,6 +7,11 @@ import TagsList from "./components/TagsList";
 
 const defaultProject = Project('default');
 
-const todo1 = Todo('clean bathroom', 'needs to wash the floor and the wc', Priority.LOW, defaultProject, TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance'));
+const todoCleanBathroom = Todo('clean bathroom', 'needs to wash the floor and the wc', Priority.LOW, defaultProject, TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance'));
 
-console.log(todo1.getId())
+const projectHouseChores = Project('House Chores');
+
+todoCleanBathroom.setProject(projectHouseChores);
+projectHouseChores.deleteTodo(todoCleanBathroom.getId());
+
+console.log(projectHouseChores.getTodos());

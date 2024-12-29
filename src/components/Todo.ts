@@ -9,8 +9,7 @@ const Todo = (title: string, description: string, priority: Priority, project: I
     const id = v4();
     let dueDate = new Date();
     let done = false;
-
-    return {
+    const todo: ITodo = {
         addTag(tagId: string): void {
             if (tags.filter(tag => tag.id === tagId).length > 0) return;
             const tag = TagsList.filter(tag => tag.id === tagId)[0];
@@ -53,6 +52,7 @@ const Todo = (title: string, description: string, priority: Priority, project: I
             priority = newPriority;
         },
         setProject(newProject: IProject): void {
+            newProject.addTodo(todo);
             project = newProject;
         },
         setTitle(newTitle: string): void {
@@ -60,8 +60,12 @@ const Todo = (title: string, description: string, priority: Priority, project: I
         },
         toggleDone(): void {
             done = !done;
-        },
+        }
     }
+
+    project.addTodo(todo);
+
+    return todo;
 }
 
 export default Todo;

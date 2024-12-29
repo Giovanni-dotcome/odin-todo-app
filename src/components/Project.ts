@@ -25,6 +25,7 @@ const Project = (title: string): IProject => {
         },
         addTodo(todo: ITodo) {
             todos.push(todo);
+        //     shouldn't I add the project to the todo that I add to the proget it self????
         }
     }
 }

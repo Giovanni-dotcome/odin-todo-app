@@ -26,6 +26,6 @@ const todoTakeAWalk = Todo(
 );
 
 const ui = Ui(projects);
-ui.displayProjects(projects);
+ui.displayProjects();
 ui.displayProject(projectWorkout);
 ui.displayTodos(projectWorkout)

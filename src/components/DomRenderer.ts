@@ -3,7 +3,6 @@ import InteractionHandler from "../components/InteractionHandler"
 import IStateManager from "../interfaces/IStateManager";
 import ITodo from "../interfaces/ITodo";
 import ITag from "../interfaces/ITag";
-import Priority from "./Priority";
 
 const DomRenderer = (stateManager: IStateManager) => {
   const projectsHtmlElement = document.querySelector('#projectsList')!
@@ -12,7 +11,7 @@ const DomRenderer = (stateManager: IStateManager) => {
 
   const interactionHandler = InteractionHandler(stateManager)
 
-  function displayTodo(todo: ITodo) {
+  function displayTodo(todo: ITodo, project: IProject) {
     const todoHtmlElement = document.createElement('div')
     const contentHtmlElement = document.createElement('div')
     const checkboxHtmlElement = document.createElement('input')
@@ -23,6 +22,11 @@ const DomRenderer = (stateManager: IStateManager) => {
     contentHtmlElement.textContent = todo.getTitle()
     checkboxHtmlElement.type = 'checkbox'
     checkboxHtmlElement.checked = todo.isDone()
+    checkboxHtmlElement.addEventListener('input', () => {
+      interactionHandler.deleteTodo(todo, project)
+      displayTodos(project)
+    })
+
     dueDateHtmlElement.type = 'date'
     priorityHtmlElement.style.background = todo.getPriority()
     priorityHtmlElement.classList.add('priority')
@@ -65,7 +69,7 @@ const DomRenderer = (stateManager: IStateManager) => {
 
     const todos = project.getTodos()
 
-    todos.forEach(todo => displayTodo(todo))
+    todos.forEach(todo => displayTodo(todo, project))
   }
 
   function displayProjectTitle(project: IProject | null) {

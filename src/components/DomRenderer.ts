@@ -61,6 +61,16 @@ const DomRenderer = (stateManager: IStateManager) => {
     todosHtmlElement.append(todoHtmlElement)
   }
 
+  function displayAddTodoButton() {
+    const addTodoHtmlElement = document.createElement('div')
+    addTodoHtmlElement.textContent = 'add todo'
+    addTodoHtmlElement.addEventListener('click', () => {
+      console.log('clicked add todo button');
+      // TODO: add rendering of pop up to add new todo. then call interactionHandler.addTodo('tile', etc...)
+    })
+    todosHtmlElement.append(addTodoHtmlElement)
+  }
+
   function displayTodos(project: IProject | null) {
     todosHtmlElement.innerHTML = ``
 
@@ -70,6 +80,7 @@ const DomRenderer = (stateManager: IStateManager) => {
     const todos = project.getTodos()
 
     todos.forEach(todo => displayTodo(todo, project))
+    displayAddTodoButton()
   }
 
   function displayProjectTitle(project: IProject | null) {

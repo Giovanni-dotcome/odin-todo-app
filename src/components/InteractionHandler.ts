@@ -1,7 +1,9 @@
 import IProject from "../interfaces/IProject";
 import ITodo from "../interfaces/ITodo";
 import Project from "../components/Project";
+import Todo from "../components/Todo";
 import IStateManager from "../interfaces/IStateManager";
+import Priority from "./Priority";
 
 const InteractionHandler = (stateManager: IStateManager) => {
 
@@ -24,6 +26,10 @@ const InteractionHandler = (stateManager: IStateManager) => {
 
   function deleteTodo(todoToRemove: ITodo, project: IProject) {
     project.deleteTodo(todoToRemove.getId())
+  }
+
+  function addTodo(title: string, description: string, priority: Priority, project: IProject, tags: ITag[]) {
+    project.addTodo(Todo(title, description, priority, project, tags))
   }
 
   return {

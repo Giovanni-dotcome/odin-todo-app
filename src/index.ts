@@ -26,7 +26,7 @@ const todoTakeAWalk = Todo(
   'Take a walk',
   'Do 10.000 steps in less than 2 hours',
   Priority.MEDIUM, projectWorkout,
-  TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance')
+  TagsList.filter(tag => tag.name === 'Fitness' || tag.name === 'Work')
 );
 
 const ui = DomRenderer(stateManager);

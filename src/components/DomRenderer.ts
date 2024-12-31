@@ -2,21 +2,57 @@ import IProject from "../interfaces/IProject";
 import InteractionHandler from "../components/InteractionHandler"
 import IStateManager from "../interfaces/IStateManager";
 import ITodo from "../interfaces/ITodo";
+import ITag from "../interfaces/ITag";
 
 const DomRenderer = (stateManager: IStateManager) => {
-  const projectsHtml = document.querySelector('#projectsList')!
-  const todosHtml = document.querySelector('#todosList')!
-  const projectHtml = document.querySelector('#selectedProject')!
+  const projectsHtmlElement = document.querySelector('#projectsList')!
+  const todosHtmlElement = document.querySelector('#todosList')!
+  const projectHtmlElement = document.querySelector('#selectedProject')!
+
   const interactionHandler = InteractionHandler(stateManager)
 
   function displayTodo(todo: ITodo) {
-    const li = document.createElement('li')
-    li.textContent = todo.getTitle()
-    todosHtml.append(li)
+    const todoHtmlElement = document.createElement('li')
+    const contentHtmlElement = document.createElement('div')
+    const checkboxHtmlElement = document.createElement('input')
+    const dueDateHtmlElement = document.createElement('input')
+    const tagsHtmlElement = document.createElement('div')
+
+    contentHtmlElement.textContent = todo.getTitle()
+    checkboxHtmlElement.type = 'checkbox'
+    checkboxHtmlElement.checked = todo.isDone()
+    dueDateHtmlElement.type = 'date'
+
+    todo.getTags().forEach((tag: ITag) => {
+      const tagHtmlElement = document.createElement('div')
+      tagHtmlElement.style.background = tag.color
+      tagHtmlElement.textContent = tag.name
+
+      tagsHtmlElement.append(tagHtmlElement)
+    })
+
+    const date = todo.getDueDate()!
+
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    let formattedDate = `${year}-${month}-${day}`;
+    console.log(formattedDate);
+
+
+    dueDateHtmlElement.value = formattedDate ? formattedDate : ''
+
+    todoHtmlElement.append(checkboxHtmlElement)
+    todoHtmlElement.append(contentHtmlElement)
+    todoHtmlElement.append(dueDateHtmlElement)
+    todoHtmlElement.append(tagsHtmlElement)
+
+    todosHtmlElement.append(todoHtmlElement)
   }
 
   function displayTodos(project: IProject | null) {
-    todosHtml.innerHTML = ``
+    todosHtmlElement.innerHTML = ``
 
     if (!project)
       return
@@ -27,16 +63,16 @@ const DomRenderer = (stateManager: IStateManager) => {
   }
 
   function displayProjectTitle(project: IProject | null) {
-    projectHtml.textContent = ''
+    projectHtmlElement.textContent = ''
 
     if (!project)
       return
 
-    projectHtml.textContent = project.getTitle()
+    projectHtmlElement.textContent = project.getTitle()
   }
 
   function displayProjects() {
-    projectsHtml.innerHTML = ``
+    projectsHtmlElement.innerHTML = ``
     const projects = stateManager.getProjects()
 
     projects.forEach(project => {
@@ -53,7 +89,7 @@ const DomRenderer = (stateManager: IStateManager) => {
         displayProjects()
         displayMain(null)
       })
-      projectsHtml.append(li)
+      projectsHtmlElement.append(li)
     })
 
     const liAddProjectHtml = document.createElement('li')
@@ -64,7 +100,7 @@ const DomRenderer = (stateManager: IStateManager) => {
       displayProjects()
     })
 
-    projectsHtml.append(liAddProjectHtml)
+    projectsHtmlElement.append(liAddProjectHtml)
   }
 
   function displayMain(project: IProject | null) {

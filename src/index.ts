@@ -18,14 +18,21 @@ stateManager.addProject(projectHouseChores)
 const todoCleanBathroom = Todo(
   'clean bathroom',
   'needs to wash the floor and the wc',
-  Priority.LOW, projectHouseChores,
+  Priority.HIGH, projectHouseChores,
+  TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance')
+);
+
+const todoStudy = Todo(
+  'Study Math',
+  'Do the first few chapters of the book',
+  Priority.LOW, projectWorkout,
   TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance')
 );
 
 const todoTakeAWalk = Todo(
   'Take a walk',
   'Do 10.000 steps in less than 2 hours',
-  Priority.MEDIUM, projectWorkout,
+  Priority.LOW, projectWorkout,
   TagsList.filter(tag => tag.name === 'Fitness' || tag.name === 'Work')
 );
 

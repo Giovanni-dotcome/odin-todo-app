@@ -3,6 +3,7 @@ import InteractionHandler from "../components/InteractionHandler"
 import IStateManager from "../interfaces/IStateManager";
 import ITodo from "../interfaces/ITodo";
 import ITag from "../interfaces/ITag";
+import Priority from "./Priority";
 
 const DomRenderer = (stateManager: IStateManager) => {
   const projectsHtmlElement = document.querySelector('#projectsList')!
@@ -17,11 +18,14 @@ const DomRenderer = (stateManager: IStateManager) => {
     const checkboxHtmlElement = document.createElement('input')
     const dueDateHtmlElement = document.createElement('input')
     const tagsHtmlElement = document.createElement('div')
+    const priorityHtmlElement = document.createElement('div')
 
     contentHtmlElement.textContent = todo.getTitle()
     checkboxHtmlElement.type = 'checkbox'
     checkboxHtmlElement.checked = todo.isDone()
     dueDateHtmlElement.type = 'date'
+    priorityHtmlElement.style.background = todo.getPriority()
+    priorityHtmlElement.style.height = '100px'
 
     todo.getTags().forEach((tag: ITag) => {
       const tagHtmlElement = document.createElement('div')
@@ -38,11 +42,12 @@ const DomRenderer = (stateManager: IStateManager) => {
     const year = date.getFullYear();
 
     let formattedDate = `${year}-${month}-${day}`;
-    console.log(formattedDate);
+    //console.log(formattedDate);
 
 
     dueDateHtmlElement.value = formattedDate ? formattedDate : ''
 
+    todoHtmlElement.append(priorityHtmlElement)
     todoHtmlElement.append(checkboxHtmlElement)
     todoHtmlElement.append(contentHtmlElement)
     todoHtmlElement.append(dueDateHtmlElement)

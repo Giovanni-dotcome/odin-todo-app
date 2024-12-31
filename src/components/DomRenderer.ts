@@ -1,12 +1,19 @@
 import IProject from "../interfaces/IProject";
 import InteractionHandler from "../components/InteractionHandler"
 import IStateManager from "../interfaces/IStateManager";
+import ITodo from "../interfaces/ITodo";
 
 const DomRenderer = (stateManager: IStateManager) => {
   const projectsHtml = document.querySelector('#projectsList')!
   const todosHtml = document.querySelector('#todosList')!
   const projectHtml = document.querySelector('#selectedProject')!
   const interactionHandler = InteractionHandler(stateManager)
+
+  function displayTodo(todo: ITodo) {
+    const li = document.createElement('li')
+    li.textContent = todo.getTitle()
+    todosHtml.append(li)
+  }
 
   function displayTodos(project: IProject | null) {
     todosHtml.innerHTML = ``
@@ -16,11 +23,7 @@ const DomRenderer = (stateManager: IStateManager) => {
 
     const todos = project.getTodos()
 
-    todos.forEach(todo => {
-      const li = document.createElement('li')
-      li.textContent = todo.getTitle()
-      todosHtml.append(li)
-    })
+    todos.forEach(todo => displayTodo(todo))
   }
 
   function displayProjectTitle(project: IProject | null) {

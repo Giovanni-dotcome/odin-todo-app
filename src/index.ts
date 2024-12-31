@@ -25,23 +25,7 @@ const todoTakeAWalk = Todo(
   TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance')
 );
 
-todoCleanBathroom.setProject(projectHouseChores);
-projectHouseChores.deleteTodo(todoCleanBathroom.getId());
-
-const ui = Ui();
+const ui = Ui(projects);
 ui.displayProjects(projects);
-// ui.displayProjects();
-// ui.displayTodos();
-//
-
-//const ul = document.querySelector('ul')
-//const h1 = document.querySelector('h1')
-//const main = document.querySelector('main')
-//const mainUl = main?.querySelector('ul')
-
-//if (ul)
-//  ul.innerHTML = `<li>${defaultProject.getTitle()}</li>`;
-//if (h1)
-//  h1.innerHTML = `${defaultProject.getTitle()}`;
-//if (mainUl)
-//  mainUl.innerHTML = `${todoCleanBathroom.getTitle()}`;
+ui.displayProject(projectWorkout);
+ui.displayTodos(projectWorkout)

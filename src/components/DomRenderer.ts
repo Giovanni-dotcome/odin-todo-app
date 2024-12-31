@@ -13,7 +13,7 @@ const DomRenderer = (stateManager: IStateManager) => {
   const interactionHandler = InteractionHandler(stateManager)
 
   function displayTodo(todo: ITodo) {
-    const todoHtmlElement = document.createElement('li')
+    const todoHtmlElement = document.createElement('div')
     const contentHtmlElement = document.createElement('div')
     const checkboxHtmlElement = document.createElement('input')
     const dueDateHtmlElement = document.createElement('input')
@@ -25,7 +25,7 @@ const DomRenderer = (stateManager: IStateManager) => {
     checkboxHtmlElement.checked = todo.isDone()
     dueDateHtmlElement.type = 'date'
     priorityHtmlElement.style.background = todo.getPriority()
-    priorityHtmlElement.style.height = '100px'
+    priorityHtmlElement.classList.add('priority')
 
     todo.getTags().forEach((tag: ITag) => {
       const tagHtmlElement = document.createElement('div')
@@ -52,6 +52,7 @@ const DomRenderer = (stateManager: IStateManager) => {
     todoHtmlElement.append(contentHtmlElement)
     todoHtmlElement.append(dueDateHtmlElement)
     todoHtmlElement.append(tagsHtmlElement)
+    todoHtmlElement.classList.add('todo')
 
     todosHtmlElement.append(todoHtmlElement)
   }

@@ -4,7 +4,7 @@ import Todo from "./components/Todo";
 import Priority from "./components/Priority";
 import Project from "./components/Project";
 import TagsList from "./components/TagsList";
-import Ui from "./components/Ui"
+import DomRenderer from "./components/DomRenderer"
 
 const projectWorkout = Project('Workout');
 const projectHouseChores = Project('House Chores');
@@ -25,7 +25,7 @@ const todoTakeAWalk = Todo(
   TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance')
 );
 
-const ui = Ui(projects);
+const ui = DomRenderer(projects);
 ui.displayProjects();
 ui.displayProject(projectWorkout);
 ui.displayTodos(projectWorkout)

@@ -1,13 +1,12 @@
 import IProject from "../interfaces/IProject";
-import Project from "../components/Project";
-import ITodo from "../interfaces/ITodo";
 import InteractionHandler from "../components/InteractionHandler"
+import IStateManager from "../interfaces/IStateManager";
 
-const DomRenderer = (projects: IProject[]) => {
+const DomRenderer = (stateManager: IStateManager) => {
   const projectsHtml = document.querySelector('#projectsList')!
   const todosHtml = document.querySelector('#todosList')!
   const projectHtml = document.querySelector('#selectedProject')!
-  const interactionHandler = InteractionHandler(projects)
+  const interactionHandler = InteractionHandler(stateManager)
 
   function displayTodos(project: IProject | null) {
     todosHtml.innerHTML = ``
@@ -35,6 +34,7 @@ const DomRenderer = (projects: IProject[]) => {
 
   function displayProjects() {
     projectsHtml.innerHTML = ``
+    const projects = stateManager.getProjects()
 
     projects.forEach(project => {
       const li = document.createElement('li')

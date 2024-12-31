@@ -5,11 +5,15 @@ import Priority from "./components/Priority";
 import Project from "./components/Project";
 import TagsList from "./components/TagsList";
 import DomRenderer from "./components/DomRenderer"
+import StateManager from './components/StateManager';
 
 const projectWorkout = Project('Workout');
 const projectHouseChores = Project('House Chores');
 
-let projects = [projectWorkout, projectHouseChores]
+const stateManager = StateManager()
+
+stateManager.addProject(projectWorkout)
+stateManager.addProject(projectHouseChores)
 
 const todoCleanBathroom = Todo(
   'clean bathroom',
@@ -25,7 +29,10 @@ const todoTakeAWalk = Todo(
   TagsList.filter(tag => tag.name === 'Personal' || tag.name === 'Maintenance')
 );
 
-const ui = DomRenderer(projects);
+const ui = DomRenderer(stateManager);
+
 ui.displayProjects();
 ui.displayProject(projectWorkout);
 ui.displayTodos(projectWorkout)
+
+export default stateManager

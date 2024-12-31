@@ -1,12 +1,13 @@
 import IProject from "../interfaces/IProject";
 import Project from "../components/Project";
+import IStateManager from "../interfaces/IStateManager";
 
-const InteractionHandler = (projects: IProject[]) => {
+const InteractionHandler = (stateManager: IStateManager) => {
 
   function addProject() {
     const newProjectTitle: string | null = prompt('Project Name:')
     if (newProjectTitle)
-      projects.push(Project(newProjectTitle))
+      stateManager.addProject(Project(newProjectTitle))
   }
 
 
@@ -16,9 +17,7 @@ const InteractionHandler = (projects: IProject[]) => {
   //}
 
   function deleteProject(projectToRemove: IProject) {
-    const index = projects.findIndex(project => project.getId() === projectToRemove.getId())
-    if (index !== -1)
-      projects.splice(index, 1)
+    stateManager.deleteProject(projectToRemove)
     //const projectToDisplay = getProjectToDisplay(projectToRemove)
   }
 

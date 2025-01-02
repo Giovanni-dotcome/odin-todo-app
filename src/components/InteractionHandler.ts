@@ -4,6 +4,7 @@ import Project from "../components/Project";
 import Todo from "../components/Todo";
 import IStateManager from "../interfaces/IStateManager";
 import Priority from "./Priority";
+import ITag from "../interfaces/ITag";
 
 const InteractionHandler = (stateManager: IStateManager) => {
 
@@ -23,7 +24,6 @@ const InteractionHandler = (stateManager: IStateManager) => {
     stateManager.deleteProject(projectToRemove)
     //const projectToDisplay = getProjectToDisplay(projectToRemove)
   }
-
   function deleteTodo(todoToRemove: ITodo, project: IProject) {
     project.deleteTodo(todoToRemove.getId())
   }

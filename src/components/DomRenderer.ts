@@ -8,7 +8,7 @@ const DomRenderer = (stateManager: IStateManager) => {
   const projectsHtmlElement = document.querySelector('#projectsList')!
   const todosHtmlElement = document.querySelector('#todosList')!
   const projectHtmlElement = document.querySelector('#selectedProject')!
-
+  const popupHtmlElement = document.querySelector('#popup')!
   const interactionHandler = InteractionHandler(stateManager)
 
   function displayTodo(todo: ITodo, project: IProject) {
@@ -65,8 +65,9 @@ const DomRenderer = (stateManager: IStateManager) => {
     const addTodoHtmlElement = document.createElement('div')
     addTodoHtmlElement.textContent = 'add todo'
     addTodoHtmlElement.addEventListener('click', () => {
-      console.log('clicked add todo button');
-      // TODO: add rendering of pop up to add new todo. then call interactionHandler.addTodo('tile', etc...)
+      popupHtmlElement.classList.toggle('hidden')
+      // TODO: add rendering of pop up to add new todo.
+      // then call interactionHandler.addTodo('tile', etc...)
     })
     todosHtmlElement.append(addTodoHtmlElement)
   }

@@ -5,16 +5,15 @@ body
   display: flex
   height: 100vh
   nav
-    flex-grow: 1
+    width: 290px
     li
       display: flex
       justify-content: space-around
       > *
         border: 1px solid green
-        width: 200px
-        height: 50px
   main
-    flex-grow: 5
+    min-width: 300px
+    flex-grow: 1
   > *
     border: 1px solid red
 
@@ -22,6 +21,7 @@ body
   display: flex
   background-color: whitesmoke
   color: black
+  width: 360px
   justify-content: space-between
   > *
     padding: 2.5rem 0
@@ -31,5 +31,21 @@ body
 
 #todosList
   display: flex
+  align-items: center
   flex-direction: column
   gap: 2rem
+
+#popup
+  background-color: green
+  color: white
+  width: 360px
+
+.hidden
+  display: none
+
+@media only screen and (max-width: 1000px)
+  nav
+    display: none
+@media only screen and (max-width: 500px)
+  #popup
+    display: none

@@ -18,7 +18,36 @@
     <div id="todosList"></div>
   </main>
   <div id="popup" class="hidden">
-    I'm hidden
+    <div class="title">
+      <input type="text" placeholder="title">
+    </div>
+    <div class="description">
+      <input type="text" placeholder="description">
+    </div>
+    <div class="dueDate">
+      <input type="date">
+    </div>
+    <div class="priority">
+      <label for="priority">priority</label>
+      <select name="priority" id="priority">
+        <option value="low">low</option>
+        <option value="medium">medium</option>
+        <option value="high">high</option>
+      </select>
+    </div>
+    <div class="project">
+      <select name="project" id="project">
+      </select>
+    </div>
+    <div class="tag tag-container">
+      <button class="tag-button" style="background-color: #FF5733;">Work</button>
+      <button class="tag-button" style="background-color: #33FF57;">Personal</button>
+      <button class="tag-button" style="background-color: #FFCC00;">Shopping</button>
+      <button class="tag-button" style="background-color: #33A1FF;">Fitness</button>
+      <button class="tag-button" style="background-color: #9B59B6;">Study</button>
+      <button class="tag-button" style="background-color: #F39C12;">Maintenance</button>
+    </div>
+  </div>
   </div>
 </body>
 

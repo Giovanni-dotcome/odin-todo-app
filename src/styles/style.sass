@@ -49,3 +49,31 @@ body
 @media only screen and (max-width: 500px)
   #popup
     display: none
+
+// body
+//     font-family: Arial, sans-serif
+//     background-color: #f4f4f9
+//     padding: 20px
+
+.tag-container
+    display: flex
+    flex-wrap: wrap
+    gap: 10px
+
+.tag-button
+    display: inline-block
+    padding: 10px 20px
+    font-size: 16px
+    color: white
+    border: none
+    border-radius: 25px
+    cursor: pointer
+    opacity: 0.8
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease
+
+    &:hover
+        transform: scale(1.05)
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+
+    &:active
+        opacity: 1

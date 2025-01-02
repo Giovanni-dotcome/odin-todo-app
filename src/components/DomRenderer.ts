@@ -65,6 +65,15 @@ const DomRenderer = (stateManager: IStateManager) => {
     const addTodoHtmlElement = document.createElement('div')
     addTodoHtmlElement.textContent = 'add todo'
     addTodoHtmlElement.addEventListener('click', () => {
+      const projectsHtmlElement = popupHtmlElement.querySelector('#project')
+      const projects = stateManager.getProjects()
+
+      projects.forEach(project => {
+        const option = document.createElement('option')
+        option.value = project.getTitle()
+        option.innerHTML = project.getTitle()
+        projectsHtmlElement?.appendChild(option)
+      })
       popupHtmlElement.classList.toggle('hidden')
       // TODO: add rendering of pop up to add new todo.
       // then call interactionHandler.addTodo('tile', etc...)

@@ -36,7 +36,7 @@ body
   gap: 2rem
 
 #popup
-  background-color: green
+  background-color: #1e293b
   color: white
   width: 360px
 
@@ -60,20 +60,21 @@ body
     flex-wrap: wrap
     gap: 10px
 
-.tag-button
+button
     display: inline-block
-    padding: 10px 20px
-    font-size: 16px
+    padding: 0.25rem 0.75rem
+    font-size: 0.75rem
     color: white
     border: none
     border-radius: 25px
     cursor: pointer
-    opacity: 0.8
     transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease
 
+.tag-button
+    opacity: 0.5
     &:hover
         transform: scale(1.05)
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 
-    &:active
-        opacity: 1
+.tag-checked
+    opacity: 1

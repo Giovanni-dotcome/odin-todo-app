@@ -3,27 +3,27 @@ import IProject from './IProject'
 import Priority from "../components/Priority";
 
 export default interface ITodo {
-    getId(): string;
+  getId(): string;
 
-    getTitle(): string;
-    setTitle(title: string): void;
+  getTitle(): string;
+  setTitle(title: string): void;
 
-    getDescription(): string;
-    setDescription(description: string): void;
+  getDescription(): string;
+  setDescription(description: string): void;
 
-    getDueDate(): Date | null;
-    setDueDate(dueDate: Date | null): void;
+  getDueDate(): Date | null;
+  setDueDate(dueDate: Date | null): void;
 
-    getPriority(): Priority;
-    setPriority(priority: Priority): void;
+  getPriority(): string;
+  setPriority(priority: string): void;
 
-    isDone(): boolean;
-    toggleDone(): void;
+  isDone(): boolean;
+  toggleDone(): void;
 
-    getProject(): IProject;
-    setProject(project: IProject): void;
+  getProject(): IProject;
+  setProject(project: IProject): void;
 
-    getTags(): ITag[];
-    addTag(tagId: string): void;
-    deleteTag(tagId: string): void;
+  getTags(): ITag[];
+  addTag(tagId: string): void;
+  deleteTag(tagId: string): void;
 }

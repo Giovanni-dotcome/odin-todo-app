@@ -7,6 +7,12 @@ const StateManager = () => {
     return projects;
   }
 
+  function getProject(projectId: string): IProject | undefined {
+    const projectFound = projects.find(project => project.getId() === projectId)
+    if (projectFound)
+      return projectFound
+  }
+
   function addProject(project: IProject) {
     projects.push(project)
   }
@@ -19,6 +25,7 @@ const StateManager = () => {
 
   return {
     getProjects,
+    getProject,
     addProject,
     deleteProject
   }

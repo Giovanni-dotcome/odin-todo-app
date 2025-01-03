@@ -3,6 +3,7 @@ import InteractionHandler from "../components/InteractionHandler"
 import IStateManager from "../interfaces/IStateManager";
 import ITodo from "../interfaces/ITodo";
 import ITag from "../interfaces/ITag";
+import TagsList from "./TagsList";
 
 const DomRenderer = (stateManager: IStateManager) => {
   const projectsHtmlElement = document.querySelector('#projectsList')!
@@ -61,19 +62,55 @@ const DomRenderer = (stateManager: IStateManager) => {
     todosHtmlElement.append(todoHtmlElement)
   }
 
-  function displayAddTodoButton() {
+  function displayTogglePopupButton(project: IProject) {
     const addTodoHtmlElement = document.createElement('div')
     addTodoHtmlElement.textContent = 'add todo'
     addTodoHtmlElement.addEventListener('click', () => {
       const projectsHtmlElement = popupHtmlElement.querySelector('#project')
       const projects = stateManager.getProjects()
 
+      const tagsHtmlElement = document.querySelector('#tags')!
+
+      TagsList.forEach(tag => {
+        const tagHtmlElemenet = document.createElement('button')
+        tagHtmlElemenet.classList.add('tag-button')
+        tagHtmlElemenet.innerText = `#${tag.name}`
+        tagHtmlElemenet.value = tag.name
+        tagHtmlElemenet.id = tag.id
+        tagHtmlElemenet.style.backgroundColor = tag.color
+        tagHtmlElemenet.addEventListener('click', () => {
+          tagHtmlElemenet.classList.toggle('tag-checked')
+        })
+        tagsHtmlElement.append(tagHtmlElemenet)
+      })
+
       projects.forEach(project => {
         const option = document.createElement('option')
-        option.value = project.getTitle()
+        option.value = project.getId()
         option.innerHTML = project.getTitle()
         projectsHtmlElement?.appendChild(option)
       })
+
+      const addTodoButtonHtml = document.querySelector('#addTodo')!
+      addTodoButtonHtml.addEventListener('click', () => {
+        const titleHtml = document.querySelector('#title') as HTMLInputElement
+        const descriptionHtml = document.querySelector('#description') as HTMLInputElement
+        const dueDateHtml = document.querySelector('#dueDate') as HTMLInputElement
+        const priorityHtml = document.querySelector('#priority') as HTMLInputElement
+        const projectHtml = document.querySelector('#project') as HTMLInputElement
+
+        interactionHandler.addTodo(
+          titleHtml.value,
+          descriptionHtml.value,
+          dueDateHtml.value,
+          priorityHtml.value,
+          projectHtml.value,
+          document.querySelectorAll('.tag-button')
+        )
+        displayMain(project)
+      })
+
+
       popupHtmlElement.classList.toggle('hidden')
       // TODO: add rendering of pop up to add new todo.
       // then call interactionHandler.addTodo('tile', etc...)
@@ -90,7 +127,7 @@ const DomRenderer = (stateManager: IStateManager) => {
     const todos = project.getTodos()
 
     todos.forEach(todo => displayTodo(todo, project))
-    displayAddTodoButton()
+    displayTogglePopupButton(project)
   }
 
   function displayProjectTitle(project: IProject | null) {
@@ -146,4 +183,4 @@ const DomRenderer = (stateManager: IStateManager) => {
   }
 }
 
-export default DomRenderer;
+export default DomRenderer

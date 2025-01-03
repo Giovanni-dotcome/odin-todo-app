@@ -3,7 +3,7 @@ import ITodo from "../interfaces/ITodo";
 import Project from "../components/Project";
 import Todo from "../components/Todo";
 import IStateManager from "../interfaces/IStateManager";
-import Priority from "./Priority";
+import GenerateTag from "../utils/GenerateTag/GenerateTag"
 import ITag from "../interfaces/ITag";
 
 const InteractionHandler = (stateManager: IStateManager) => {
@@ -28,14 +28,41 @@ const InteractionHandler = (stateManager: IStateManager) => {
     project.deleteTodo(todoToRemove.getId())
   }
 
-  function addTodo(title: string, description: string, priority: Priority, project: IProject, tags: ITag[]) {
-    project.addTodo(Todo(title, description, priority, project, tags))
+  function addTodo(
+    title: string,
+    description: string,
+    dueDateString: string,
+    priority: string,
+    projectId: string,
+    tagsNodeList: NodeListOf<Element>
+  ) {
+    const dueDate: Date = new Date(dueDateString)
+    const project: IProject | undefined = stateManager.getProject(projectId)
+    const tags: ITag[] = []
+
+    tagsNodeList.forEach(element => {
+      if (element.classList.contains('tag-checked')) {
+        const id = (element as HTMLElement).id
+
+        const tag = GenerateTag(id)
+        if (tag)
+          tags.push(tag)
+      }
+    });
+
+    if (!project)
+      return;
+    console.log(project.getTodos());
+    project.addTodo(Todo(title, description, dueDate, priority, project, tags))
+    console.log(project.getTodos());
+
   }
 
   return {
     addProject,
     deleteProject,
-    deleteTodo
+    deleteTodo,
+    addTodo
   }
 }
 

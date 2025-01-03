@@ -4,6 +4,7 @@ import IStateManager from "../interfaces/IStateManager";
 import ITodo from "../interfaces/ITodo";
 import ITag from "../interfaces/ITag";
 import TagsList from "./TagsList";
+import GeneratePriorityColor from "../utils/GeneratePriorityColor";
 
 const DomRenderer = (stateManager: IStateManager) => {
   const projectsHtmlElement = document.querySelector('#projectsList')!
@@ -29,7 +30,7 @@ const DomRenderer = (stateManager: IStateManager) => {
     })
 
     dueDateHtmlElement.type = 'date'
-    priorityHtmlElement.style.background = todo.getPriority()
+    priorityHtmlElement.style.background = GeneratePriorityColor(todo.getPriority())
     priorityHtmlElement.classList.add('priority')
 
     todo.getTags().forEach((tag: ITag) => {
@@ -40,15 +41,18 @@ const DomRenderer = (stateManager: IStateManager) => {
       tagsHtmlElement.append(tagHtmlElement)
     })
 
-    const date = todo.getDueDate()!
+    let date = todo.getDueDate()!
+    //
+    // const day = date.getDate();
+    // const month = date.getMonth() + 1;
+    // const year = date.getFullYear();
+    //
+    // let formattedDate = `${year}-${day}-${month}`;
+    //
 
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    let formattedDate = `${year}-${month}-${day}`;
-    //console.log(formattedDate);
-
+    let day = ("0" + date.getDate()).slice(-2);
+    let month = ("0" + (date.getMonth() + 1)).slice(-2);
+    let formattedDate = date.getFullYear() + "-" + (month) + "-" + (day);
 
     dueDateHtmlElement.value = formattedDate ? formattedDate : ''
 

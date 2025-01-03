@@ -3,7 +3,7 @@ import ITodo from "../interfaces/ITodo";
 import Project from "../components/Project";
 import Todo from "../components/Todo";
 import IStateManager from "../interfaces/IStateManager";
-import GenerateTag from "../utils/GenerateTag/GenerateTag"
+import GenerateTag from "../utils/GenerateTag"
 import ITag from "../interfaces/ITag";
 
 const InteractionHandler = (stateManager: IStateManager) => {
@@ -36,7 +36,7 @@ const InteractionHandler = (stateManager: IStateManager) => {
     projectId: string,
     tagsNodeList: NodeListOf<Element>
   ) {
-    const dueDate: Date = new Date(dueDateString)
+    let dueDate: Date = new Date(dueDateString)
     const project: IProject | undefined = stateManager.getProject(projectId)
     const tags: ITag[] = []
 
@@ -52,10 +52,15 @@ const InteractionHandler = (stateManager: IStateManager) => {
 
     if (!project)
       return;
-    console.log(project.getTodos());
-    project.addTodo(Todo(title, description, dueDate, priority, project, tags))
-    console.log(project.getTodos());
 
+    const isCorrectDate = (date: Date): boolean => {
+      return date instanceof Date && isFinite(+date);
+
+    };
+
+    if (!isCorrectDate(dueDate)) dueDate = new Date()
+
+    project.addTodo(Todo(title, description, dueDate, priority, project, tags))
   }
 
   return {

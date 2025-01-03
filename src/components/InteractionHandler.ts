@@ -10,8 +10,10 @@ const InteractionHandler = (stateManager: IStateManager) => {
 
   function addProject() {
     const newProjectTitle: string | null = prompt('Project Name:')
-    if (newProjectTitle)
-      stateManager.addProject(Project(newProjectTitle))
+    if (!newProjectTitle)
+      return
+    stateManager.setCurrentProject(Project(newProjectTitle))
+    stateManager.addProject(Project(newProjectTitle))
   }
 
 
@@ -24,6 +26,7 @@ const InteractionHandler = (stateManager: IStateManager) => {
     stateManager.deleteProject(projectToRemove)
     //const projectToDisplay = getProjectToDisplay(projectToRemove)
   }
+
   function deleteTodo(todoToRemove: ITodo, project: IProject) {
     project.deleteTodo(todoToRemove.getId())
   }

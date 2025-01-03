@@ -4,6 +4,7 @@ import Project from "./Project";
 const StateManager = () => {
   let currentProject: IProject = Project("Default")
   let projects: IProject[] = []
+  projects.push(currentProject)
 
   function getCurrentProject(): IProject {
     return currentProject;

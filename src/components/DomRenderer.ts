@@ -132,7 +132,7 @@ const DomRenderer = (stateManager: IStateManager) => {
           projectHtml.value,
           document.querySelectorAll('.tag-button')
         )
-        displayMain(project)
+        displayMain()
       })
 
 
@@ -168,11 +168,11 @@ const DomRenderer = (stateManager: IStateManager) => {
       removeProject.textContent = 'X'
       li.append(selectProject)
       li.append(removeProject)
-      selectProject.addEventListener('click', () => displayMain(project));
+      selectProject.addEventListener('click', () => displayMain());
       removeProject.addEventListener('click', () => {
         interactionHandler.deleteProject(project)
         displaySidebar()
-        displayMain(null)
+        displayMain()
       })
       projectsHtmlElement.append(li)
     })

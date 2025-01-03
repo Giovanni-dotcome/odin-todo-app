@@ -1,9 +1,19 @@
 import IProject from "../interfaces/IProject"
+import Project from "./Project";
 
 const StateManager = () => {
+  let currentProject: IProject = Project("Default")
   let projects: IProject[] = []
 
-  function getProjects() {
+  function getCurrentProject(): IProject {
+    return currentProject;
+  }
+
+  function setCurrentProject(newProject: IProject): void {
+    currentProject = newProject
+  }
+
+  function getProjects(): IProject[] {
     return projects;
   }
 
@@ -13,11 +23,11 @@ const StateManager = () => {
       return projectFound
   }
 
-  function addProject(project: IProject) {
+  function addProject(project: IProject): void {
     projects.push(project)
   }
 
-  function deleteProject(projectToRemove: IProject) {
+  function deleteProject(projectToRemove: IProject): void {
     const index = projects.findIndex(project => project.getId() === projectToRemove.getId())
     if (index !== -1)
       projects.splice(index, 1)
@@ -27,7 +37,9 @@ const StateManager = () => {
     getProjects,
     getProject,
     addProject,
-    deleteProject
+    deleteProject,
+    getCurrentProject,
+    setCurrentProject
   }
 }
 

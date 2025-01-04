@@ -12,8 +12,9 @@ const InteractionHandler = (stateManager: IStateManager) => {
     const newProjectTitle: string | null = prompt('Project Name:')
     if (!newProjectTitle)
       return
-    stateManager.setCurrentProject(Project(newProjectTitle))
-    stateManager.addProject(Project(newProjectTitle))
+    const newProject = Project(newProjectTitle)
+    stateManager.setCurrentProject(newProject)
+    stateManager.addProject(newProject)
   }
 
 

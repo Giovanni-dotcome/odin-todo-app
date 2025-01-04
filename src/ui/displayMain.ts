@@ -4,7 +4,6 @@ import togglePopup from "./togglePopup"
 import { todosHtmlElement, selectedProjectHtmlElement } from "./htmlElements"
 
 function displayProjectTitle(stateManager: IStateManager) {
-  selectedProjectHtmlElement.textContent = ''
   selectedProjectHtmlElement.textContent = stateManager.getCurrentProject().getTitle()
 }
 

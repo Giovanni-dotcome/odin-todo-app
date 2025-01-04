@@ -23,13 +23,16 @@ function displayProjects(stateManager: IStateManager) {
     });
     removeProject.addEventListener('click', () => {
       interactionHandler.deleteProject(project)
-      // TODO: 
-      // if deleting stateManager.setCurrentProject():
-      //    if no other projcet in stateManager.getProjects():
-      //        display nothing
-      //    else: display stateManager.getProjects()[0]
-      // else:
-      //    don't rerender the main
+      // TODO: the ids below are different... they should be the same
+      if (project.getId() === stateManager.getCurrentProject().getId()) {
+        console.log('deleting current project');
+        stateManager.setCurrentProject(stateManager.getDefaultProject())
+      }
+
+      console.log(project.getTitle(), project.getId());
+      console.log(stateManager.getCurrentProject().getTitle(),
+        stateManager.getCurrentProject().getId());
+
       displaySidebar(stateManager)
       displayMain(stateManager)
     })

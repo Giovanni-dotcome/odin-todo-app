@@ -2,9 +2,14 @@ import IProject from "../interfaces/IProject"
 import Project from "./Project";
 
 const StateManager = () => {
-  let currentProject: IProject = Project("Default")
+  const defaultProject = Project('Default')
+  let currentProject: IProject = defaultProject
   let projects: IProject[] = []
   projects.push(currentProject)
+
+  function getDefaultProject(): IProject {
+    return defaultProject
+  }
 
   function getCurrentProject(): IProject {
     return currentProject;
@@ -38,8 +43,9 @@ const StateManager = () => {
     getProjects,
     getProject,
     addProject,
-    deleteProject,
+    getDefaultProject,
     getCurrentProject,
+    deleteProject,
     setCurrentProject
   }
 }

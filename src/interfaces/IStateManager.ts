@@ -1,6 +1,7 @@
 import IProject from "./IProject";
 
 export default interface IStateManager {
+  getDefaultProject(): IProject;
   getProjects(): IProject[];
   getCurrentProject(): IProject;
   setCurrentProject(newProject: IProject): void;

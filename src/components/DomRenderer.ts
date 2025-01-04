@@ -20,6 +20,9 @@ const DomRenderer = (stateManager: IStateManager) => {
       projectHtml.value,
       document.querySelectorAll('.tag-button')
     )
+    titleHtml.value = ``
+    descriptionHtml.value = ``
+    dueDateHtml.value = ``
     displayMain(stateManager)
   })
 

@@ -5,6 +5,7 @@ import Todo from "../components/Todo";
 import IStateManager from "../interfaces/IStateManager";
 import GenerateTag from "../utils/GenerateTag"
 import ITag from "../interfaces/ITag";
+import { popupHtmlElement } from "../ui/htmlElements";
 
 const InteractionHandler = (stateManager: IStateManager) => {
 
@@ -65,6 +66,7 @@ const InteractionHandler = (stateManager: IStateManager) => {
     if (!isCorrectDate(dueDate)) dueDate = new Date()
 
     project.addTodo(Todo(title, description, dueDate, priority, project, tags))
+    popupHtmlElement.classList.toggle('hidden')
   }
 
   return {

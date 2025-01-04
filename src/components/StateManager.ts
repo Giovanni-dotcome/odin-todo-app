@@ -19,6 +19,14 @@ const StateManager = () => {
     currentProject = newProject
   }
 
+  function isDefaultProject(project: IProject): boolean {
+    return project.getId() === defaultProject.getId()
+  }
+
+  function isCurrentProject(project: IProject): boolean {
+    return project.getId() === currentProject.getId()
+  }
+
   function getProjects(): IProject[] {
     return projects;
   }
@@ -43,6 +51,8 @@ const StateManager = () => {
     getProjects,
     getProject,
     addProject,
+    isDefaultProject,
+    isCurrentProject,
     getDefaultProject,
     getCurrentProject,
     deleteProject,

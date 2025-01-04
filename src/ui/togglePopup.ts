@@ -6,7 +6,7 @@ export default function togglePopup(stateManager: IStateManager) {
   const addTodoHtmlElement = document.createElement('div')
   addTodoHtmlElement.textContent = 'add todo'
   addTodoHtmlElement.addEventListener('click', () => {
-    const projectsHtmlElement = popupHtmlElement.querySelector('#project')!
+    const projectsHtmlElement = (popupHtmlElement.querySelector('#project') as HTMLSelectElement)!
     const projects = stateManager.getProjects()
 
     tagsHtmlElement.innerHTML = ``
@@ -28,6 +28,8 @@ export default function togglePopup(stateManager: IStateManager) {
       const option = document.createElement('option')
       option.value = project.getId()
       option.innerHTML = project.getTitle()
+      if (stateManager.isCurrentProject(project))
+        option.selected = true
       projectsHtmlElement.appendChild(option)
     })
 

@@ -16,22 +16,16 @@ function displayProjects(stateManager: IStateManager) {
     selectProject.textContent = project.getTitle()
     removeProject.textContent = 'X'
     li.append(selectProject)
-    li.append(removeProject)
+    if (!stateManager.isDefaultProject(project))
+      li.append(removeProject)
     selectProject.addEventListener('click', () => {
       stateManager.setCurrentProject(project)
       displayMain(stateManager)
     });
     removeProject.addEventListener('click', () => {
       interactionHandler.deleteProject(project)
-      // TODO: the ids below are different... they should be the same
-      if (project.getId() === stateManager.getCurrentProject().getId()) {
-        console.log('deleting current project');
+      if (stateManager.isDefaultProject(project))
         stateManager.setCurrentProject(stateManager.getDefaultProject())
-      }
-
-      console.log(project.getTitle(), project.getId());
-      console.log(stateManager.getCurrentProject().getTitle(),
-        stateManager.getCurrentProject().getId());
 
       displaySidebar(stateManager)
       displayMain(stateManager)

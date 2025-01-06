@@ -9,15 +9,17 @@
 
 
 <body>
-  <nav>
-    <h2>Project</h2>
-    <ul id="projectsList"></ul>
-  </nav>
-  <main>
-    <h1 id="selectedProject"></h1>
-    <div id="todosList"></div>
-  </main>
-  <div id="popup" class="hidden">
+  <div class="content" id="content">
+    <nav>
+      <h2>Project</h2>
+      <ul id="projectsList"></ul>
+    </nav>
+    <main>
+      <h1 id="selectedProject"></h1>
+      <div id="todosList"></div>
+    </main>
+  </div>
+  <div id="sidebar">
     <div class="title">
       <input type="text" id="title" placeholder=" title">
     </div>
@@ -45,6 +47,7 @@
       <button>add todo</button>
     </div>
   </div>
+  <div class="overlay" id="overlay"></div>
 </body>
 
 </html>

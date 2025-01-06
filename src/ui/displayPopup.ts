@@ -1,9 +1,9 @@
-import { popupHtmlElement, tagsHtmlElement, navHtmlElement, mainHtmlElement } from "./htmlElements"
+import { tagsHtmlElement, sidebar, content, overlay } from "./htmlElements"
 import TagsList from "../components/TagsList"
 import IStateManager from "../interfaces/IStateManager"
 
 export default function displayPopup(stateManager: IStateManager) {
-  const projectsHtmlElement = (popupHtmlElement.querySelector('#project') as HTMLSelectElement)!
+  const projectsHtmlElement = (sidebar.querySelector('#project') as HTMLSelectElement)!
   const projects = stateManager.getProjects()
 
   tagsHtmlElement.innerHTML = ``
@@ -29,9 +29,11 @@ export default function displayPopup(stateManager: IStateManager) {
       option.selected = true
     projectsHtmlElement.appendChild(option)
   })
-
-  popupHtmlElement.classList.remove('hidden')
-  mainHtmlElement.classList.add('blur')
-  navHtmlElement.classList.add('hidden')
+  sidebar.style.right = '0'; // Show sidebar
+  content.classList.add('blur'); // Blur the content
+  overlay.classList.add('visible'); // Show overlay
+  //sidebar.classList.remove('hidden')
+  //mainHtmlElement.classList.add('blur')
+  //navHtmlElement.classList.add('hidden')
 }
 

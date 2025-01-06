@@ -5,7 +5,7 @@ import Todo from "../components/Todo";
 import IStateManager from "../interfaces/IStateManager";
 import GenerateTag from "../utils/GenerateTag"
 import ITag from "../interfaces/ITag";
-import { mainHtmlElement, navHtmlElement, popupHtmlElement } from "../ui/htmlElements";
+import { mainHtmlElement, navHtmlElement } from "../ui/htmlElements";
 
 const InteractionHandler = (stateManager: IStateManager) => {
   function addProject() {
@@ -59,7 +59,6 @@ const InteractionHandler = (stateManager: IStateManager) => {
 
     project.addTodo(Todo(title, description, dueDate, priority, project, tags))
     stateManager.setCurrentProject(project)
-    popupHtmlElement.classList.toggle('hidden')
     navHtmlElement.classList.remove('hidden')
     mainHtmlElement.classList.remove('blur')
   }

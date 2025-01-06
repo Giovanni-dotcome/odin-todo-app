@@ -7,16 +7,16 @@ function displayProjectTitle(stateManager: IStateManager) {
   selectedProjectHtmlElement.textContent = stateManager.getCurrentProject().getTitle()
 }
 
-function displayPopupHtmlButton(stateManager: IStateManager) {
-  const popupHtmlButton = document.createElement('div')
-  popupHtmlButton.textContent = 'add todo'
+function displayButtonToOpenPopup(stateManager: IStateManager) {
+  const buttonToOpenPopupHtml = document.createElement('div')
+  buttonToOpenPopupHtml.textContent = 'add todo'
 
-  popupHtmlButton.addEventListener('click', e => {
+  buttonToOpenPopupHtml.addEventListener('click', e => {
     e.stopPropagation()
     displayPopup(stateManager)
   })
 
-  todosHtmlElement.append(popupHtmlButton)
+  todosHtmlElement.append(buttonToOpenPopupHtml)
 }
 
 const DisplayTodos = (stateManager: IStateManager) => {
@@ -28,7 +28,7 @@ const DisplayTodos = (stateManager: IStateManager) => {
     todosHtmlElement.appendChild(todoHtmlElement)
   })
 
-  displayPopupHtmlButton(stateManager)
+  displayButtonToOpenPopup(stateManager)
 
 }
 

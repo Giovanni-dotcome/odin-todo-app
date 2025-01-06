@@ -2,7 +2,8 @@ import { interactionHandler } from "..";
 import IStateManager from "../interfaces/IStateManager";
 import displaySidebar from "../ui/DisplaySidebar"
 import displayMain from "../ui/displayMain";
-import { addTodoButtonHtml, mainHtmlElement, navHtmlElement, popupHtmlElement } from "../ui/htmlElements";
+import hideSidebar from "../utils/hideSidebar";
+import { addTodoButtonHtml, overlay } from "../ui/htmlElements";
 
 const DomRenderer = (stateManager: IStateManager) => {
   addTodoButtonHtml.addEventListener('click', () => {
@@ -25,18 +26,10 @@ const DomRenderer = (stateManager: IStateManager) => {
     descriptionHtml.value = ``
     dueDateHtml.value = ``
     displayMain(stateManager)
-
+    hideSidebar()
   })
 
-  mainHtmlElement.addEventListener('click', (e) => {
-    e.stopPropagation()
-    if (mainHtmlElement.classList.contains('blur')) {
-      navHtmlElement.classList.remove('hidden')
-      mainHtmlElement.classList.remove('blur')
-      popupHtmlElement.classList.add('hidden')
-    }
-  })
-
+  overlay.addEventListener('click', () => hideSidebar())
 
   displayMain(stateManager)
   displaySidebar(stateManager)

@@ -1,4 +1,4 @@
-import { todosHtmlElement, popupHtmlElement, tagsHtmlElement } from "./htmlElements"
+import { todosHtmlElement, popupHtmlElement, tagsHtmlElement, navHtmlElement, mainHtmlElement } from "./htmlElements"
 import TagsList from "../components/TagsList"
 import IStateManager from "../interfaces/IStateManager"
 
@@ -6,7 +6,8 @@ export default function togglePopup(stateManager: IStateManager) {
   const addTodoHtmlElement = document.createElement('div')
   addTodoHtmlElement.textContent = 'add todo'
 
-  addTodoHtmlElement.addEventListener('click', () => {
+  addTodoHtmlElement.addEventListener('click', (e) => {
+    e.stopPropagation()
     const projectsHtmlElement = (popupHtmlElement.querySelector('#project') as HTMLSelectElement)!
     const projects = stateManager.getProjects()
 
@@ -34,7 +35,9 @@ export default function togglePopup(stateManager: IStateManager) {
       projectsHtmlElement.appendChild(option)
     })
 
-    popupHtmlElement.classList.toggle('hidden')
+    popupHtmlElement.classList.remove('hidden')
+    mainHtmlElement.classList.add('blur')
+    navHtmlElement.classList.add('hidden')
     // TODO: add rendering of pop up to add new todo.
     // then call interactionHandler.addTodo('tile', etc...)
   })

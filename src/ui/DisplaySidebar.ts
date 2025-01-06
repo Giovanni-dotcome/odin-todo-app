@@ -24,8 +24,7 @@ function displayProjects(stateManager: IStateManager) {
     });
     removeProject.addEventListener('click', () => {
       interactionHandler.deleteProject(project)
-      if (stateManager.isDefaultProject(project))
-        stateManager.setCurrentProject(stateManager.getDefaultProject())
+      stateManager.setCurrentProject(stateManager.getDefaultProject())
 
       displaySidebar(stateManager)
       displayMain(stateManager)

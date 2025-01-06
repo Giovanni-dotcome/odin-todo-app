@@ -5,10 +5,9 @@ import Todo from "../components/Todo";
 import IStateManager from "../interfaces/IStateManager";
 import GenerateTag from "../utils/GenerateTag"
 import ITag from "../interfaces/ITag";
-import { popupHtmlElement } from "../ui/htmlElements";
+import { mainHtmlElement, navHtmlElement, popupHtmlElement } from "../ui/htmlElements";
 
 const InteractionHandler = (stateManager: IStateManager) => {
-
   function addProject() {
     const newProjectTitle: string | null = prompt('Project Name:')
     if (!newProjectTitle)
@@ -17,12 +16,6 @@ const InteractionHandler = (stateManager: IStateManager) => {
     stateManager.setCurrentProject(newProject)
     stateManager.addProject(newProject)
   }
-
-
-  //function getProjectToDisplay(projectToRemove: IProject): IProject | null {
-  //  // TODO: implemente logic to display the project below or above the project is removed (now it returns null so it's just resetted the display)
-  //  return null;
-  //}
 
   function deleteProject(projectToRemove: IProject) {
     stateManager.deleteProject(projectToRemove)
@@ -60,7 +53,6 @@ const InteractionHandler = (stateManager: IStateManager) => {
 
     const isCorrectDate = (date: Date): boolean => {
       return date instanceof Date && isFinite(+date);
-
     };
 
     if (!isCorrectDate(dueDate)) dueDate = new Date()
@@ -68,6 +60,8 @@ const InteractionHandler = (stateManager: IStateManager) => {
     project.addTodo(Todo(title, description, dueDate, priority, project, tags))
     stateManager.setCurrentProject(project)
     popupHtmlElement.classList.toggle('hidden')
+    navHtmlElement.classList.remove('hidden')
+    mainHtmlElement.classList.remove('blur')
   }
 
   return {

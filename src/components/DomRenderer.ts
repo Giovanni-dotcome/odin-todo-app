@@ -2,7 +2,7 @@ import { interactionHandler } from "..";
 import IStateManager from "../interfaces/IStateManager";
 import displaySidebar from "../ui/DisplaySidebar"
 import displayMain from "../ui/displayMain";
-import { addTodoButtonHtml } from "../ui/htmlElements";
+import { addTodoButtonHtml, mainHtmlElement, navHtmlElement, popupHtmlElement } from "../ui/htmlElements";
 
 const DomRenderer = (stateManager: IStateManager) => {
   addTodoButtonHtml.addEventListener('click', () => {
@@ -20,11 +20,23 @@ const DomRenderer = (stateManager: IStateManager) => {
       projectHtml.value,
       document.querySelectorAll('.tag-button')
     )
+
     titleHtml.value = ``
     descriptionHtml.value = ``
     dueDateHtml.value = ``
     displayMain(stateManager)
+
   })
+
+  mainHtmlElement.addEventListener('click', (e) => {
+    e.stopPropagation()
+    if (mainHtmlElement.classList.contains('blur')) {
+      navHtmlElement.classList.remove('hidden')
+      mainHtmlElement.classList.remove('blur')
+      popupHtmlElement.classList.add('hidden')
+    }
+  })
+
 
   displayMain(stateManager)
   displaySidebar(stateManager)

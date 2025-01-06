@@ -5,6 +5,7 @@ import IStateManager from "../interfaces/IStateManager"
 export default function togglePopup(stateManager: IStateManager) {
   const addTodoHtmlElement = document.createElement('div')
   addTodoHtmlElement.textContent = 'add todo'
+
   addTodoHtmlElement.addEventListener('click', () => {
     const projectsHtmlElement = (popupHtmlElement.querySelector('#project') as HTMLSelectElement)!
     const projects = stateManager.getProjects()
@@ -37,6 +38,7 @@ export default function togglePopup(stateManager: IStateManager) {
     // TODO: add rendering of pop up to add new todo.
     // then call interactionHandler.addTodo('tile', etc...)
   })
+
   todosHtmlElement.append(addTodoHtmlElement)
 }
 

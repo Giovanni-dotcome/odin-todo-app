@@ -66,6 +66,7 @@ const InteractionHandler = (stateManager: IStateManager) => {
     if (!isCorrectDate(dueDate)) dueDate = new Date()
 
     project.addTodo(Todo(title, description, dueDate, priority, project, tags))
+    stateManager.setCurrentProject(project)
     popupHtmlElement.classList.toggle('hidden')
   }
 

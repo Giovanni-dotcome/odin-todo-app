@@ -1,10 +1,22 @@
 import IStateManager from "../interfaces/IStateManager"
 import DisplayTodo from "./DisplayTodo"
-import togglePopup from "./togglePopup"
+import displayPopup from "./displayPopup"
 import { todosHtmlElement, selectedProjectHtmlElement } from "./htmlElements"
 
 function displayProjectTitle(stateManager: IStateManager) {
   selectedProjectHtmlElement.textContent = stateManager.getCurrentProject().getTitle()
+}
+
+function displayPopupHtmlButton(stateManager: IStateManager) {
+  const popupHtmlButton = document.createElement('div')
+  popupHtmlButton.textContent = 'add todo'
+
+  popupHtmlButton.addEventListener('click', e => {
+    e.stopPropagation()
+    displayPopup(stateManager)
+  })
+
+  todosHtmlElement.append(popupHtmlButton)
 }
 
 const DisplayTodos = (stateManager: IStateManager) => {
@@ -15,7 +27,9 @@ const DisplayTodos = (stateManager: IStateManager) => {
     const todoHtmlElement = DisplayTodo(todo, stateManager)
     todosHtmlElement.appendChild(todoHtmlElement)
   })
-  togglePopup(stateManager)
+
+  displayPopupHtmlButton(stateManager)
+
 }
 
 export default function displayMain(stateManager: IStateManager) {

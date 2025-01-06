@@ -6,4 +6,14 @@ const tagsHtmlElement = document.querySelector('#tags')!
 const addTodoButtonHtml = document.querySelector('#addTodo')!
 const navHtmlElement = document.querySelector('nav')!
 const mainHtmlElement = document.querySelector('main')!
-export { addTodoButtonHtml, navHtmlElement, mainHtmlElement, projectsHtmlElement, tagsHtmlElement, todosHtmlElement, selectedProjectHtmlElement, popupHtmlElement }
+
+export {
+  addTodoButtonHtml,
+  navHtmlElement,
+  mainHtmlElement,
+  projectsHtmlElement,
+  tagsHtmlElement,
+  todosHtmlElement,
+  selectedProjectHtmlElement,
+  popupHtmlElement
+}

@@ -32,8 +32,5 @@ export default function displayPopup(stateManager: IStateManager) {
   sidebar.style.right = '0'; // Show sidebar
   content.classList.add('blur'); // Blur the content
   overlay.classList.add('visible'); // Show overlay
-  //sidebar.classList.remove('hidden')
-  //mainHtmlElement.classList.add('blur')
-  //navHtmlElement.classList.add('hidden')
 }
 

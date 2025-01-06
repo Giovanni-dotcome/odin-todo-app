@@ -20,26 +20,30 @@
     </main>
   </div>
   <div id="sidebar">
-    <div class="title">
-      <input type="text" id="title" placeholder=" title">
+    <div>
+      <div class="title">
+        <input type="text" id="title" placeholder=" title">
+      </div>
+      <div class="description">
+        <input type="text" id="description" placeholder="description">
+      </div>
+      <div class="dueDate">
+        <input type="date" id="dueDate">
+      </div>
     </div>
-    <div class="description">
-      <input type="text" id="description" placeholder="description">
-    </div>
-    <div class="dueDate">
-      <input type="date" id="dueDate">
-    </div>
-    <div class="priority">
-      <label for="priority">priority</label>
-      <select name="priority" id="priority">
-        <option value="low">low</option>
-        <option value="medium">medium</option>
-        <option value="high">high</option>
-      </select>
-    </div>
-    <div class="project">
-      <select name="project" id="project">
-      </select>
+    <div>
+      <div class="priority">
+        <label for="priority">priority</label>
+        <select name="priority" id="priority">
+          <option value="low">low</option>
+          <option value="medium">medium</option>
+          <option value="high">high</option>
+        </select>
+      </div>
+      <div class="project">
+        <select name="project" id="project">
+        </select>
+      </div>
     </div>
     <div id="tags" class="tag-container">
     </div>

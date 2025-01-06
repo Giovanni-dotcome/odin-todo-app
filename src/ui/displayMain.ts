@@ -9,7 +9,8 @@ function displayProjectTitle(stateManager: IStateManager) {
 
 function displayButtonToOpenPopup(stateManager: IStateManager) {
   const buttonToOpenPopupHtml = document.createElement('div')
-  buttonToOpenPopupHtml.textContent = 'add todo'
+  buttonToOpenPopupHtml.classList.add('new-todo-button')
+  buttonToOpenPopupHtml.textContent = 'New Todo'
 
   buttonToOpenPopupHtml.addEventListener('click', e => {
     e.stopPropagation()

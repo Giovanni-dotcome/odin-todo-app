@@ -1,4 +1,4 @@
-import { tagsHtmlElement, sidebar, content, overlay, addTodoButtonHtml } from "./htmlElements"
+import { tagsHtmlElement, sidebar, content, overlay, addTodoHtml } from "./htmlElements"
 import TagsList from "../components/TagsList"
 import IStateManager from "../interfaces/IStateManager"
 import ITodo from "../interfaces/ITodo"
@@ -7,7 +7,12 @@ import displayMain from "./displayMain"
 import hideSidebar from "../utils/hideSidebar"
 
 export default function displayPopup(stateManager: IStateManager, todo?: ITodo) {
-  addTodoButtonHtml.addEventListener('click', () => {
+  addTodoHtml.innerHTML = ``
+  const addTodobuttonElement = document.createElement('button')
+  addTodobuttonElement.textContent = 'add todo'
+  addTodoHtml.append(addTodobuttonElement)
+
+  addTodobuttonElement.addEventListener('click', () => {
     const titleHtml = document.querySelector('#title') as HTMLInputElement
     const descriptionHtml = document.querySelector('#description') as HTMLInputElement
     const dueDateHtml = document.querySelector('#dueDate') as HTMLInputElement
@@ -59,6 +64,7 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
       option.selected = true
     projectsHtmlElement.appendChild(option)
   })
+
   sidebar.style.right = '0'; // Show sidebar
   content.classList.add('blur'); // Blur the content
   overlay.classList.add('visible'); // Show overlay

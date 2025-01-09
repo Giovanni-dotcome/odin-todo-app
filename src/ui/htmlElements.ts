@@ -2,7 +2,7 @@ const projectsHtmlElement = document.querySelector('#projectsList')!
 const todosHtmlElement = document.querySelector('#todosList')! as HTMLDivElement
 const selectedProjectHtmlElement = document.querySelector('#selectedProject')!
 const tagsHtmlElement = document.querySelector('#tags')!
-const addTodoButtonHtml = document.querySelector('#addTodo')!
+const addTodoHtml = document.querySelector('#addTodo')!
 const navHtmlElement = document.querySelector('nav')!
 const mainHtmlElement = document.querySelector('main')!
 const sidebar = document.getElementById('sidebar')!
@@ -13,7 +13,7 @@ export {
   sidebar,
   content,
   overlay,
-  addTodoButtonHtml,
+  addTodoHtml,
   navHtmlElement,
   mainHtmlElement,
   projectsHtmlElement,

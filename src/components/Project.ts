@@ -10,6 +10,9 @@ const Project = (title: string): IProject => {
     getId() {
       return id;
     },
+    updateTodo(todo: ITodo): void {
+      // TODO: IMPLEMENT
+    },
     getTitle() {
       return title;
     },

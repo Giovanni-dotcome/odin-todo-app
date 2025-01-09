@@ -4,6 +4,7 @@ import GeneratePriorityColor from "../utils/GeneratePriorityColor"
 import IStateManager from "../interfaces/IStateManager"
 import InteractionHandler from "../components/InteractionHandler"
 import displayTodos from "./displayMain"
+import displayPopup from "./displayPopup"
 
 function createPriorityElement(todo: ITodo): HTMLDivElement {
   const priorityHtmlElement = document.createElement('div')
@@ -78,6 +79,10 @@ function createupperDivHtmlElement(
 
   return upperDivHtmlElement
 }
+function updateTodo(todo: ITodo, stateManager: IStateManager) {
+  displayPopup(stateManager, todo)
+}
+
 const DisplayTodo = (todo: ITodo, stateManager: IStateManager): HTMLDivElement => {
   const todoHtmlElement = document.createElement('div')
 
@@ -96,6 +101,9 @@ const DisplayTodo = (todo: ITodo, stateManager: IStateManager): HTMLDivElement =
   todoHtmlElement.append(priorityHtmlElement)
   todoHtmlElement.append(rightHtmlElement)
   todoHtmlElement.classList.add('todo')
+  todoHtmlElement.id = todo.getId()
+
+  todoHtmlElement.addEventListener('click', () => updateTodo(todo, stateManager))
 
   return todoHtmlElement
 }

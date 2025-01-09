@@ -7,4 +7,5 @@ export default interface IProject {
     setTitle(title: string): void;
     deleteTodo(todoId: string): void;
     addTodo(todo: ITodo): void;
+    updateTodo(todo: ITodo, title: string, description: string, ): void;
 }

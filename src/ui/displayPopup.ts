@@ -1,8 +1,38 @@
-import { tagsHtmlElement, sidebar, content, overlay } from "./htmlElements"
+import { tagsHtmlElement, sidebar, content, overlay, addTodoButtonHtml } from "./htmlElements"
 import TagsList from "../components/TagsList"
 import IStateManager from "../interfaces/IStateManager"
+import ITodo from "../interfaces/ITodo"
+import { interactionHandler } from ".."
+import displayMain from "./displayMain"
+import hideSidebar from "../utils/hideSidebar"
 
-export default function displayPopup(stateManager: IStateManager) {
+export default function displayPopup(stateManager: IStateManager, todo?: ITodo) {
+  addTodoButtonHtml.addEventListener('click', () => {
+    const titleHtml = document.querySelector('#title') as HTMLInputElement
+    const descriptionHtml = document.querySelector('#description') as HTMLInputElement
+    const dueDateHtml = document.querySelector('#dueDate') as HTMLInputElement
+    const priorityHtml = document.querySelector('#priority') as HTMLInputElement
+    const projectHtml = document.querySelector('#project') as HTMLInputElement
+
+    interactionHandler.addTodo(
+      titleHtml.value,
+      descriptionHtml.value,
+      dueDateHtml.value,
+      priorityHtml.value,
+      projectHtml.value,
+      document.querySelectorAll('.tag-button')
+    )
+
+    titleHtml.value = ``
+    descriptionHtml.value = ``
+    dueDateHtml.value = ``
+    displayMain(stateManager)
+    hideSidebar()
+  })
+
+  if (todo) {
+    console.log(`updating todo: ${todo}`)
+  }
   const projectsHtmlElement = (sidebar.querySelector('#project') as HTMLSelectElement)!
   const projects = stateManager.getProjects()
 

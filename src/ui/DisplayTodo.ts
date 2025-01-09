@@ -18,11 +18,13 @@ function createCheckboxElement(todo: ITodo, stateManager: IStateManager): HTMLDi
   const interactionHandler = InteractionHandler(stateManager)
 
   checkboxHtmlElement.type = 'checkbox'
-  checkboxHtmlElement.checked = todo.isDone()
+  checkboxHtmlElement.checked = false
 
-  checkboxHtmlElement.addEventListener('input', () => {
+  checkboxHtmlElement.addEventListener('click', (e) => {
     interactionHandler.deleteTodo(todo, stateManager.getCurrentProject())
+    checkboxHtmlElement.checked = true
     displayTodos(stateManager)
+    e.stopPropagation()
   })
 
   return checkboxHtmlElement
@@ -103,7 +105,7 @@ const DisplayTodo = (todo: ITodo, stateManager: IStateManager): HTMLDivElement =
   todoHtmlElement.classList.add('todo')
   todoHtmlElement.id = todo.getId()
 
-  todoHtmlElement.addEventListener('click', () => updateTodo(todo, stateManager))
+  todoHtmlElement.addEventListener('click', (e) => updateTodo(todo, stateManager))
 
   return todoHtmlElement
 }

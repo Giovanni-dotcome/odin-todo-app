@@ -14,6 +14,7 @@ function displayButtonToOpenPopup(stateManager: IStateManager) {
 
   buttonToOpenPopupHtml.addEventListener('click', e => {
     e.stopPropagation()
+    console.log('inside display main')
     displayPopup(stateManager)
   })
 

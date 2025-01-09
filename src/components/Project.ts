@@ -10,8 +10,20 @@ const Project = (title: string): IProject => {
     getId() {
       return id;
     },
-    updateTodo(todo: ITodo): void {
-      // TODO: IMPLEMENT
+    updateTodo(id, title, description, dueDate, priority, project, tags) {
+      const index = todos.findIndex(todo => todo.getId() === id)
+
+      if (index === -1)
+        return
+
+      todos[index].setTitle(title)
+      todos[index].setDescription(description)
+      todos[index].setDueDate(dueDate)
+      todos[index].setPriority(priority)
+      todos[index].setProject(project)
+      todos[index].emptyTags()
+      tags.forEach(tag => todos[index].addTag(tag.id))
+      // TODO: after update generate more copies of Todo object, so updating add!!
     },
     getTitle() {
       return title;

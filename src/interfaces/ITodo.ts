@@ -1,10 +1,10 @@
 import ITag from './ITag'
 import IProject from './IProject'
-import Priority from "../components/Priority";
 
 export default interface ITodo {
   getId(): string;
 
+  emptyTags(): void;
   getTitle(): string;
   setTitle(title: string): void;
 

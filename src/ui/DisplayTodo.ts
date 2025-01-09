@@ -5,6 +5,7 @@ import IStateManager from "../interfaces/IStateManager"
 import InteractionHandler from "../components/InteractionHandler"
 import displayTodos from "./displayMain"
 import displayPopup from "./displayPopup"
+import formatteDate from "../utils/formattedDate"
 
 function createPriorityElement(todo: ITodo): HTMLDivElement {
   const priorityHtmlElement = document.createElement('div')
@@ -36,14 +37,12 @@ function createContentHtmlElement(todo: ITodo): HTMLDivElement {
   return contentHtmlElement
 }
 
+
 function createDueDateHtmlElement(todo: ITodo): HTMLDivElement {
   const dueDateHtmlElement = document.createElement('input')
   dueDateHtmlElement.type = 'date'
-  let date = todo.getDueDate()!
 
-  let day = ("0" + date.getDate()).slice(-2);
-  let month = ("0" + (date.getMonth() + 1)).slice(-2);
-  let formattedDate = date.getFullYear() + "-" + (month) + "-" + (day);
+  const formattedDate = formatteDate(todo.getDueDate())
 
   dueDateHtmlElement.value = formattedDate ? formattedDate : ''
 
@@ -105,7 +104,7 @@ const DisplayTodo = (todo: ITodo, stateManager: IStateManager): HTMLDivElement =
   todoHtmlElement.classList.add('todo')
   todoHtmlElement.id = todo.getId()
 
-  todoHtmlElement.addEventListener('click', (e) => updateTodo(todo, stateManager))
+  todoHtmlElement.addEventListener('click', () => updateTodo(todo, stateManager))
 
   return todoHtmlElement
 }

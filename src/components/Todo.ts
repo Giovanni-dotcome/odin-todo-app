@@ -10,10 +10,14 @@ const Todo = (title: string, description: string, date: Date, priority: string, 
   let dueDate = date ? date : new Date();
   let done = false;
   const todo: ITodo = {
+    emptyTags() {
+      tags = []
+    },
     addTag(tagId: string): void {
       if (tags.filter(tag => tag.id === tagId).length > 0) return;
       const tag = TagsList.filter(tag => tag.id === tagId)[0];
-      tags.push(tag);
+      if (tag)
+        tags.push(tag);
     },
     getDescription(): string {
       return description;

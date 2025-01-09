@@ -5,28 +5,56 @@ import ITodo from "../interfaces/ITodo"
 import { interactionHandler } from ".."
 import displayMain from "./displayMain"
 import hideSidebar from "../utils/hideSidebar"
+import formattedDate from "../utils/formattedDate"
 
 export default function displayPopup(stateManager: IStateManager, todo?: ITodo) {
   addTodoHtml.innerHTML = ``
-  const addTodobuttonElement = document.createElement('button')
-  addTodobuttonElement.textContent = 'add todo'
+  const titleHtml = document.querySelector('#title') as HTMLInputElement
+  const descriptionHtml = document.querySelector('#description') as HTMLInputElement
+  const dueDateHtml = document.querySelector('#dueDate') as HTMLInputElement
+  const priorityHtml = document.querySelector('#priority') as HTMLInputElement
+  const projectHtml = document.querySelector('#project') as HTMLInputElement
+  const addTodobuttonElement = document.createElement('button') as HTMLButtonElement
+
+  addTodobuttonElement.textContent = todo === undefined ? 'add todo' : 'update todo'
   addTodoHtml.append(addTodobuttonElement)
 
-  addTodobuttonElement.addEventListener('click', () => {
-    const titleHtml = document.querySelector('#title') as HTMLInputElement
-    const descriptionHtml = document.querySelector('#description') as HTMLInputElement
-    const dueDateHtml = document.querySelector('#dueDate') as HTMLInputElement
-    const priorityHtml = document.querySelector('#priority') as HTMLInputElement
-    const projectHtml = document.querySelector('#project') as HTMLInputElement
+  if (todo === undefined) {
+    titleHtml.value = ``
+    descriptionHtml.value = ``
+    dueDateHtml.value = formattedDate(new Date())
+    priorityHtml.value = `low`
+    projectHtml.value = ``
+  } else {
+    titleHtml.value = todo.getTitle()
+    descriptionHtml.value = todo.getDescription()
+    dueDateHtml.value = formattedDate(todo.getDueDate())
+    priorityHtml.value = todo.getPriority()
+    projectHtml.value = todo.getPriority()
+  }
 
-    interactionHandler.addTodo(
-      titleHtml.value,
-      descriptionHtml.value,
-      dueDateHtml.value,
-      priorityHtml.value,
-      projectHtml.value,
-      document.querySelectorAll('.tag-button')
-    )
+  addTodobuttonElement.addEventListener('click', () => {
+    if (todo === undefined) {
+      interactionHandler.addTodo(
+        titleHtml.value,
+        descriptionHtml.value,
+        dueDateHtml.value,
+        priorityHtml.value,
+        projectHtml.value,
+        document.querySelectorAll('.tag-button')
+      )
+    }
+    else {
+      interactionHandler.updateTodo(
+        todo.getId(),
+        titleHtml.value,
+        descriptionHtml.value,
+        dueDateHtml.value,
+        priorityHtml.value,
+        projectHtml.value,
+        document.querySelectorAll('.tag-button')
+      )
+    }
 
     titleHtml.value = ``
     descriptionHtml.value = ``
@@ -35,9 +63,6 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
     hideSidebar()
   })
 
-  if (todo) {
-    console.log(`updating todo: ${todo}`)
-  }
   const projectsHtmlElement = (sidebar.querySelector('#project') as HTMLSelectElement)!
   const projects = stateManager.getProjects()
 
@@ -48,6 +73,8 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
     tagHtmlElemenet.innerText = `#${tag.name}`
     tagHtmlElemenet.value = tag.name
     tagHtmlElemenet.id = tag.id
+    if (todo !== undefined && todo.getTags().find(t => t.id === tag.id))
+      tagHtmlElemenet.classList.add('tag-checked')
     tagHtmlElemenet.style.backgroundColor = tag.color
     tagHtmlElemenet.addEventListener('click', () => {
       tagHtmlElemenet.classList.toggle('tag-checked')

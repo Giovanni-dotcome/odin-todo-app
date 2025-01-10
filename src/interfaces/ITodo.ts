@@ -2,6 +2,7 @@ import ITag from './ITag'
 import IProject from './IProject'
 
 export default interface ITodo {
+  getTodo(): Object;
   getId(): string;
 
   getTitle(): string;

@@ -4,6 +4,7 @@ import IProject from "../interfaces/IProject";
 import TagsList from "./TagsList";
 import Priority from "./Priority";
 import { v4 } from "uuid";
+import formatteDate from "../utils/formattedDate";
 
 const Todo = (title: string, description: string, date: Date, priority: string, project: IProject, tags: ITag[], idInput?: string): ITodo => {
   const id = idInput ? idInput : v4();
@@ -11,6 +12,17 @@ const Todo = (title: string, description: string, date: Date, priority: string, 
   let done = false;
 
   const todo: ITodo = {
+    getTodo() {
+      const dueDate = formatteDate(date)
+      return {
+        id,
+        title,
+        description,
+        dueDate,
+        priority,
+        tags
+      }
+    },
     addTag(tagId: string): void {
       if (tags.filter(tag => tag.id === tagId).length > 0) return;
       const tag = TagsList.filter(tag => tag.id === tagId)[0];

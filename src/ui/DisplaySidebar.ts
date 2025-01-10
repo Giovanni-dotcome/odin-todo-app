@@ -11,18 +11,19 @@ function displayProjects(stateManager: IStateManager) {
 
   projects.forEach(project => {
     const li = document.createElement('li')
-    const selectProject = document.createElement('div')
+    const projectTitle = document.createElement('div')
     const removeProject = document.createElement('div')
-    selectProject.textContent = project.getTitle()
+    projectTitle.textContent = project.getTitle()
     removeProject.textContent = 'X'
-    li.append(selectProject)
+    li.append(projectTitle)
     if (!stateManager.isDefaultProject(project))
       li.append(removeProject)
-    selectProject.addEventListener('click', () => {
+    li.addEventListener('click', () => {
       stateManager.setCurrentProject(project)
       displayMain(stateManager)
     });
-    removeProject.addEventListener('click', () => {
+    removeProject.addEventListener('click', (e) => {
+      e.stopPropagation()
       interactionHandler.deleteProject(project)
       stateManager.setCurrentProject(stateManager.getDefaultProject())
 

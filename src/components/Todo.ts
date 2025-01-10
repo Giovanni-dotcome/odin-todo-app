@@ -5,14 +5,12 @@ import TagsList from "./TagsList";
 import Priority from "./Priority";
 import { v4 } from "uuid";
 
-const Todo = (title: string, description: string, date: Date, priority: string, project: IProject, tags: ITag[]): ITodo => {
-  const id = v4();
+const Todo = (title: string, description: string, date: Date, priority: string, project: IProject, tags: ITag[], idInput?: string): ITodo => {
+  const id = idInput ? idInput : v4();
   let dueDate = date ? date : new Date();
   let done = false;
+
   const todo: ITodo = {
-    emptyTags() {
-      tags = []
-    },
     addTag(tagId: string): void {
       if (tags.filter(tag => tag.id === tagId).length > 0) return;
       const tag = TagsList.filter(tag => tag.id === tagId)[0];

@@ -4,7 +4,6 @@ import IProject from './IProject'
 export default interface ITodo {
   getId(): string;
 
-  emptyTags(): void;
   getTitle(): string;
   setTitle(title: string): void;
 

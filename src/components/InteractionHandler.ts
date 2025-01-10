@@ -62,7 +62,7 @@ const InteractionHandler = (stateManager: IStateManager) => {
     if (!isCorrectDate(dueDate)) dueDate = new Date()
 
     // TODO: after update generate more copies of Todo object, so updating add!!
-    project.updateTodo(id, title, description, dueDate, Priority[priority as keyof typeof Priority], project, tags)
+    project.updateTodo(id, title, description, dueDate, priority, project, tags)
 
     stateManager.setCurrentProject(project)
     navHtmlElement.classList.remove('hidden')

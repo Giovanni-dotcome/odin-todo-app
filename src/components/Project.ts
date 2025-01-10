@@ -1,6 +1,7 @@
 import IProject from "../interfaces/IProject";
 import ITodo from "../interfaces/ITodo";
 import { v4 } from 'uuid';  // Use a library to generate UUIDs
+import Todo from "./Todo";
 
 const Project = (title: string): IProject => {
   const id = v4();
@@ -15,15 +16,7 @@ const Project = (title: string): IProject => {
 
       if (index === -1)
         return
-
-      todos[index].setTitle(title)
-      todos[index].setDescription(description)
-      todos[index].setDueDate(dueDate)
-      todos[index].setPriority(priority)
-      todos[index].setProject(project)
-      todos[index].emptyTags()
-      tags.forEach(tag => todos[index].addTag(tag.id))
-      // TODO: after update generate more copies of Todo object, so updating add!!
+      todos[index] = Todo(title, description, dueDate, priority, project, tags, id)
     },
     getTitle() {
       return title;

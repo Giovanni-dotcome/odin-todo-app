@@ -1,29 +1,12 @@
-import ITag from './ITag'
 import IProject from './IProject'
 
 export default interface ITodo {
-  getTodo(): Object;
-  getId(): string;
-
-  getTitle(): string;
-  setTitle(title: string): void;
-
-  getDescription(): string;
-  setDescription(description: string): void;
-
-  getDueDate(): Date | null;
-  setDueDate(dueDate: Date | null): void;
-
-  getPriority(): string;
-  setPriority(priority: string): void;
-
-  isDone(): boolean;
-  toggleDone(): void;
-
-  getProject(): IProject;
-  setProject(project: IProject): void;
-
-  getTags(): ITag[];
-  addTag(tagId: string): void;
-  deleteTag(tagId: string): void;
+  id: string;
+  name: string;
+  description: string;
+  done: boolean;
+  date: string;
+  priority: string;
+  project: IProject;
+  tags: string[];
 }

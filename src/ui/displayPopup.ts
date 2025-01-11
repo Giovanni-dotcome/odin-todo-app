@@ -5,7 +5,7 @@ import ITodo from "../interfaces/ITodo"
 import { interactionHandler } from ".."
 import displayMain from "./displayMain"
 import hideSidebar from "../utils/hideSidebar"
-import formattedDate from "../utils/formattedDate"
+import IsoDate from "../utils/IsoDate"
 
 export default function displayPopup(stateManager: IStateManager, todo?: ITodo) {
   addTodoHtml.innerHTML = ``
@@ -22,18 +22,24 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
   if (todo === undefined) {
     titleHtml.value = ``
     descriptionHtml.value = ``
-    dueDateHtml.value = formattedDate(new Date())
+    dueDateHtml.value = IsoDate(new Date())
     priorityHtml.value = `low`
     projectHtml.value = ``
   } else {
-    titleHtml.value = todo.getTitle()
-    descriptionHtml.value = todo.getDescription()
-    dueDateHtml.value = formattedDate(todo.getDueDate())
-    priorityHtml.value = todo.getPriority()
-    projectHtml.value = todo.getPriority()
+    titleHtml.value = todo.name
+    descriptionHtml.value = todo.description
+    dueDateHtml.value = todo.date
+    priorityHtml.value = todo.priority
+    projectHtml.value = todo.project.id
   }
 
   addTodobuttonElement.addEventListener('click', () => {
+    console.log(`titleHtml: ${titleHtml.value}`)
+    console.log(`descriptionHtml: ${descriptionHtml.value}`)
+    console.log(`dueDateHtml: ${dueDateHtml.value}`)
+    console.log(`priorityHtml: ${priorityHtml.value}`)
+    console.log(`projectHtml: ${projectHtml.value}`)
+
     if (todo === undefined) {
       interactionHandler.addTodo(
         titleHtml.value,
@@ -46,7 +52,7 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
     }
     else {
       interactionHandler.updateTodo(
-        todo.getId(),
+        todo.id,
         titleHtml.value,
         descriptionHtml.value,
         dueDateHtml.value,
@@ -67,13 +73,13 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
   const projects = stateManager.getProjects()
 
   tagsHtmlElement.innerHTML = ``
-  TagsList.forEach(tag => {
+  TagsList.forEach(tag => { // TODO: refactor to use a single constructor: CreateTagHtml(id: string): HTMLDivElement (in DisplayTodo.ts there's a sample)
     const tagHtmlElemenet = document.createElement('button')
     tagHtmlElemenet.classList.add('tag-button')
     tagHtmlElemenet.innerText = `#${tag.name}`
     tagHtmlElemenet.value = tag.name
     tagHtmlElemenet.id = tag.id
-    if (todo !== undefined && todo.getTags().find(t => t.id === tag.id))
+    if (todo !== undefined && todo.tags.find(tagId => tagId === tag.id))
       tagHtmlElemenet.classList.add('tag-checked')
     tagHtmlElemenet.style.backgroundColor = tag.color
     tagHtmlElemenet.addEventListener('click', () => {
@@ -85,9 +91,9 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
   projectsHtmlElement.innerHTML = ``
   projects.forEach(project => {
     const option = document.createElement('option')
-    option.value = project.getId()
-    option.innerHTML = project.getTitle()
-    if (stateManager.isCurrentProject(project))
+    option.value = project.id
+    option.innerHTML = project.name
+    if (project.isSelected)
       option.selected = true
     projectsHtmlElement.appendChild(option)
   })

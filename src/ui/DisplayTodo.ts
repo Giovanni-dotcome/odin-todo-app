@@ -1,15 +1,14 @@
-import ITag from "../interfaces/ITag"
 import ITodo from "../interfaces/ITodo"
 import GeneratePriorityColor from "../utils/GeneratePriorityColor"
 import IStateManager from "../interfaces/IStateManager"
 import InteractionHandler from "../components/InteractionHandler"
 import displayTodos from "./displayMain"
 import displayPopup from "./displayPopup"
-import formatteDate from "../utils/formattedDate"
+import TagsList from "../components/TagsList"
 
 function createPriorityElement(todo: ITodo): HTMLDivElement {
   const priorityHtmlElement = document.createElement('div')
-  priorityHtmlElement.style.background = GeneratePriorityColor(todo.getPriority())
+  priorityHtmlElement.style.background = GeneratePriorityColor(todo.priority)
   priorityHtmlElement.classList.add('priority')
   return priorityHtmlElement
 }
@@ -22,7 +21,7 @@ function createCheckboxElement(todo: ITodo, stateManager: IStateManager): HTMLDi
   checkboxHtmlElement.checked = false
 
   checkboxHtmlElement.addEventListener('click', (e) => {
-    interactionHandler.deleteTodo(todo, stateManager.getCurrentProject())
+    interactionHandler.deleteTodo(todo, stateManager.getSelectedProject())
     checkboxHtmlElement.checked = true
     displayTodos(stateManager)
     e.stopPropagation()
@@ -33,32 +32,35 @@ function createCheckboxElement(todo: ITodo, stateManager: IStateManager): HTMLDi
 
 function createContentHtmlElement(todo: ITodo): HTMLDivElement {
   const contentHtmlElement = document.createElement('div')
-  contentHtmlElement.textContent = todo.getTitle()
+  contentHtmlElement.textContent = todo.name
   return contentHtmlElement
 }
 
 
 function createDueDateHtmlElement(todo: ITodo): HTMLDivElement {
   const dueDateHtmlElement = document.createElement('input')
+
   dueDateHtmlElement.type = 'date'
-
-  const formattedDate = formatteDate(todo.getDueDate())
-
-  dueDateHtmlElement.value = formattedDate ? formattedDate : ''
+  dueDateHtmlElement.value = todo.date
 
   return dueDateHtmlElement
 }
 
-function createTagsHtmlElement(todo: ITodo): HTMLDivElement {
+function CreateTagHtml(id: string): HTMLDivElement {
+  const tagHtml = document.createElement('div')
+  const tagObject = TagsList.find(tag => tag.id === id)
+
+  tagHtml.style.background = tagObject?.color || ''
+  tagHtml.textContent = tagObject?.name || ''
+
+  return tagHtml
+}
+
+function createTagsHtml(todo: ITodo): HTMLDivElement {
   const tagsHtmlElement = document.createElement('div')
+
   tagsHtmlElement.classList.add('tags')
-  todo.getTags().forEach((tag: ITag) => {
-    const tagHtmlElement = document.createElement('div')
-    tagHtmlElement.classList.add('tag')
-    tagHtmlElement.style.background = tag.color
-    tagHtmlElement.textContent = tag.name
-    tagsHtmlElement.append(tagHtmlElement)
-  })
+  todo.tags.forEach((tagId: string) => tagsHtmlElement.append(CreateTagHtml(tagId)))
 
   return tagsHtmlElement
 }
@@ -91,7 +93,7 @@ const DisplayTodo = (todo: ITodo, stateManager: IStateManager): HTMLDivElement =
   const checkboxHtmlElement = createCheckboxElement(todo, stateManager)
   const contentHtmlElement = createContentHtmlElement(todo)
   const dueDateHtmlElement = createDueDateHtmlElement(todo)
-  const tagsHtmlElement = createTagsHtmlElement(todo)
+  const tagsHtmlElement = createTagsHtml(todo)
   const rightHtmlElement = document.createElement('div')
   const upperDivHtmlElement = createupperDivHtmlElement(
     priorityHtmlElement, checkboxHtmlElement, contentHtmlElement, dueDateHtmlElement
@@ -102,7 +104,7 @@ const DisplayTodo = (todo: ITodo, stateManager: IStateManager): HTMLDivElement =
   todoHtmlElement.append(priorityHtmlElement)
   todoHtmlElement.append(rightHtmlElement)
   todoHtmlElement.classList.add('todo')
-  todoHtmlElement.id = todo.getId()
+  todoHtmlElement.id = todo.id
 
   todoHtmlElement.addEventListener('click', () => updateTodo(todo, stateManager))
 

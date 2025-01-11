@@ -1,50 +1,57 @@
 import { interactionHandler } from "../index";
 import IStateManager from "../interfaces/IStateManager";
-import { projectsHtmlElement } from "./htmlElements";
+import { projectsHtmlElement as projectsHtml } from "./htmlElements";
 import displayMain from "./displayMain";
+import IProject from "../interfaces/IProject";
 
+function displayProject(project: IProject, stateManager: IStateManager): HTMLElement {
+  const projectHtml = document.createElement('li')
+  const nameHtml = document.createElement('div')
+  const removeButton = document.createElement('div')
+
+  nameHtml.textContent = project.name
+  removeButton.textContent = 'X'
+  projectHtml.append(nameHtml)
+
+  if (!project.isDefault)
+    projectHtml.append(removeButton)
+
+  projectHtml.addEventListener('click', () => {
+    stateManager.setSelectedProject(project.id)
+    displayMain(stateManager)
+  });
+
+  removeButton.addEventListener('click', () => {
+    stateManager.deleteProject(project.id)
+    displaySidebar(stateManager)
+  })
+
+  return projectHtml
+}
 
 function displayProjects(stateManager: IStateManager) {
-  projectsHtmlElement.innerHTML = ``
+  projectsHtml.innerHTML = ``
 
-  const projects = stateManager.getProjects()
+  // TODO: default project needs to be rendered before the other projects
+  Object.keys(localStorage).forEach((key) => {
+    const project = JSON.parse(localStorage.getItem(key) || '');
+    const projectHtml = displayProject(project, stateManager)
+    projectsHtml.append(projectHtml)
 
-  projects.forEach(project => {
-    const li = document.createElement('li')
-    const projectTitle = document.createElement('div')
-    const removeProject = document.createElement('div')
-    projectTitle.textContent = project.getTitle()
-    removeProject.textContent = 'X'
-    li.append(projectTitle)
-    if (!stateManager.isDefaultProject(project))
-      li.append(removeProject)
-    li.addEventListener('click', () => {
-      stateManager.setCurrentProject(project)
-      displayMain(stateManager)
-    });
-    removeProject.addEventListener('click', (e) => {
-      e.stopPropagation()
-      interactionHandler.deleteProject(project)
-      stateManager.setCurrentProject(stateManager.getDefaultProject())
-
-      displaySidebar(stateManager)
-      displayMain(stateManager)
-    })
-    projectsHtmlElement.append(li)
   })
 }
 
 function displayAddProjectButton(stateManager: IStateManager) {
-  const liAddProjectHtml = document.createElement('button')
+  const newProjectButton = document.createElement('button')
 
-  liAddProjectHtml.textContent = `New Project`
-  liAddProjectHtml.addEventListener('click', () => {
+  newProjectButton.textContent = `New Project`
+  newProjectButton.addEventListener('click', () => {
     interactionHandler.addProject()
     displayMain(stateManager)
     displaySidebar(stateManager)
   })
 
-  projectsHtmlElement.append(liAddProjectHtml)
+  projectsHtml.append(newProjectButton)
 }
 
 export default function displaySidebar(stateManager: IStateManager) {

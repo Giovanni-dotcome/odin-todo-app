@@ -3,8 +3,9 @@ import DisplayTodo from "./DisplayTodo"
 import displayPopup from "./displayPopup"
 import { todosHtmlElement, selectedProjectHtmlElement } from "./htmlElements"
 
-function displayProjectTitle(stateManager: IStateManager) {
-  selectedProjectHtmlElement.textContent = stateManager.getCurrentProject().getTitle()
+function displayProjectName(stateManager: IStateManager) {
+  const project = stateManager.getSelectedProject()
+  selectedProjectHtmlElement.textContent = project.name
 }
 
 function displayButtonToOpenPopup(stateManager: IStateManager) {
@@ -22,7 +23,7 @@ function displayButtonToOpenPopup(stateManager: IStateManager) {
 
 const DisplayTodos = (stateManager: IStateManager) => {
   todosHtmlElement.innerHTML = ``
-  const todos = stateManager.getCurrentProject().getTodos()
+  const todos = stateManager.getSelectedProject().todos
 
   todos.forEach(todo => {
     const todoHtmlElement = DisplayTodo(todo, stateManager)
@@ -34,6 +35,6 @@ const DisplayTodos = (stateManager: IStateManager) => {
 }
 
 export default function displayMain(stateManager: IStateManager) {
-  displayProjectTitle(stateManager)
+  displayProjectName(stateManager)
   DisplayTodos(stateManager)
 }

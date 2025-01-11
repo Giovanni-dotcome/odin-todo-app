@@ -13,7 +13,6 @@ const StateManager = () => {
     return projects;
   }
 
-  // TODO: check if necessary, is used in addTodo, to put the project object in the todo. but I suspect the project todo is useless in the todo object
   function getProject(id: string): IProject {
     for (const key of Object.keys(localStorage)) {
       const project: IProject = JSON.parse(localStorage.getItem(key) || '{}')
@@ -35,16 +34,6 @@ const StateManager = () => {
     })
   }
 
-  // TODO: check if this is ever used
-  function isDefaultProject(id: string): boolean {
-    Object.keys(localStorage).forEach(key => {
-      const project: IProject = JSON.parse(localStorage.getItem(key) || '{}')
-      if (project.id === id && project.isDefault)
-        return true
-    })
-    return false
-  }
-
   function getDefaultProject(): IProject {
     for (const key of Object.keys(localStorage)) {
       const project: IProject = JSON.parse(localStorage.getItem(key) || '{}')
@@ -56,16 +45,6 @@ const StateManager = () => {
     localStorage.setItem(defaultProject.id, JSON.stringify(defaultProject || '{}'))
 
     return defaultProject
-  }
-
-  // TODO: check if this is ever used
-  function isSelectedProject(id: string): boolean {
-    Object.keys(localStorage).forEach(key => {
-      const project: IProject = JSON.parse(localStorage.getItem(key) || '{}')
-      if (project.id === id && project.isSelected)
-        return true
-    })
-    return false
   }
 
   function getSelectedProject(): IProject {
@@ -135,10 +114,8 @@ const StateManager = () => {
     addProject,
     deleteProject,
 
-    isDefaultProject,
     getDefaultProject,
 
-    isSelectedProject,
     getSelectedProject,
     setSelectedProject,
 

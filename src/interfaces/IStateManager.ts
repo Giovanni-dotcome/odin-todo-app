@@ -8,10 +8,8 @@ export default interface IStateManager {
   addProject(project: IProject): void;
   deleteProject(id: string): void;
 
-  isDefaultProject(id: string): boolean;
   getDefaultProject(): IProject;
 
-  isSelectedProject(id: string): boolean;
   getSelectedProject(): IProject;
   setSelectedProject(id: string): void;
 

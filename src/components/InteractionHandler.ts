@@ -51,7 +51,7 @@ const InteractionHandler = (stateManager: IStateManager) => {
     projectId: string,
     tagIds: string[]
   ) {
-    const project: IProject | undefined = stateManager.getProject(projectId)
+    const project: IProject = stateManager.getProject(projectId)
     const tags: string[] = []
 
     tagIds.forEach(id => tags.push(id));

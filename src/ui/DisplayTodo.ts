@@ -50,8 +50,8 @@ function CreateTagHtml(id: string): HTMLDivElement {
   const tagHtml = document.createElement('div')
   const tagObject = TagsList.find(tag => tag.id === id)
 
-  tagHtml.style.background = tagObject?.color || 'black'
-  tagHtml.textContent = tagObject?.name || 'trying'
+  tagHtml.style.background = tagObject?.color || ''
+  tagHtml.textContent = tagObject?.name || ''
   tagHtml.classList.add('tag')
 
   return tagHtml

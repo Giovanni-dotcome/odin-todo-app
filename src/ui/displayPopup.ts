@@ -68,7 +68,7 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
   const projects = stateManager.getProjects()
 
   tagsHtmlElement.innerHTML = ``
-  TagsList.forEach(tag => { // TODO: refactor to use a single constructor: CreateTagHtml(id: string): HTMLDivElement (in DisplayTodo.ts there's a sample)
+  TagsList.forEach(tag => {
     const tagHtmlElemenet = document.createElement('button')
     tagHtmlElemenet.classList.add('tag-button')
     tagHtmlElemenet.innerText = `#${tag.name}`
@@ -93,8 +93,8 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
     projectsHtmlElement.appendChild(option)
   })
 
-  sidebar.style.right = '0'; // Show sidebar
-  content.classList.add('blur'); // Blur the content
-  overlay.classList.add('visible'); // Show overlay
+  sidebar.style.right = '0';
+  content.classList.add('blur');
+  overlay.classList.add('visible');
 }
 

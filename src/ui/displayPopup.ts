@@ -47,7 +47,7 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
     }
     else {
       interactionHandler.updateTodo(
-        todo.id,
+        todo,
         titleHtml.value,
         descriptionHtml.value,
         dueDateHtml.value,

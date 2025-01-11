@@ -103,13 +103,14 @@ const StateManager = () => {
     })
   }
 
-  function updateTodo(projectId: string, todoId: string, newName: string, newDescription: string, newDate: string, newPriority: string, newProjectId: string, tags: string[]) {
+  function updateTodo(todo: ITodo, newName: string, newDescription: string, newDate: string, newPriority: string, newProjectId: string, tags: string[]) {
     Object.keys(localStorage).forEach(key => {
       const project: IProject = JSON.parse(localStorage.getItem(key) || '{}')
-      if (project.id === projectId)
-        deleteTodo(project.id, todoId)
+      if (project.id === todo.project.id)
+        deleteTodo(project.id, todo.id)
       if (project.id === newProjectId) {
-        const newTodo = Todo(newName, newDescription, new Date(newDate), newPriority, getProject(newProjectId), tags, todoId)
+        console.log(`adding todo inside: ${project.name}`)
+        const newTodo = Todo(newName, newDescription, new Date(newDate), newPriority, getProject(newProjectId), tags, todo.id)
         addTodo(project.id, newTodo)
       }
     })
@@ -119,8 +120,10 @@ const StateManager = () => {
     Object.keys(localStorage).forEach(key => {
       const project: IProject = JSON.parse(localStorage.getItem(key) || '{}')
       if (project.id === projectId) {
+        console.log(`deleting todo inside: ${project.name}`)
         const index = project.todos.findIndex(todo => todo.id === todoId)
         project.todos.splice(index, 1)
+        localStorage.setItem(key, JSON.stringify(project))
       }
     })
   }

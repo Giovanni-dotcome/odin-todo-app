@@ -16,6 +16,6 @@ export default interface IStateManager {
   setSelectedProject(id: string): void;
 
   addTodo(projectId: string, todo: ITodo): void;
-  updateTodo(projectId: string, todoId: string, newName: string, newDescription: string, newDate: string, newPriority: string, newProjectId: string, tags: string[]): void;
+  updateTodo(todo: ITodo, newName: string, newDescription: string, newDate: string, newPriority: string, newProjectId: string, tags: string[]): void;
   deleteTodo(projectId: string, todoId: string): void;
 }

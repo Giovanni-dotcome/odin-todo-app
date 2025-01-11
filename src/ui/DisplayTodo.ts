@@ -53,8 +53,6 @@ function CreateTagHtml(id: string): HTMLDivElement {
   tagHtml.style.background = tagObject?.color || 'black'
   tagHtml.textContent = tagObject?.name || 'trying'
 
-  TagsList.forEach(tag => console.log(`tagListid: ${tag.id} `))
-  console.log(`id in the todo tag:${id} `)
   return tagHtml
 }
 

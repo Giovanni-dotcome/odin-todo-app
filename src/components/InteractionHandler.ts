@@ -24,7 +24,7 @@ const InteractionHandler = (stateManager: IStateManager) => {
   }
 
   function updateTodo(
-    id: string,
+    todo: ITodo,
     title: string,
     description: string,
     date: string, // TODO: this date is not safe to update without any check, try to create a single function to handle dates (a template is in IsoDate.ts)
@@ -32,19 +32,13 @@ const InteractionHandler = (stateManager: IStateManager) => {
     projectId: string,
     tagsIds: string[],
   ) {
-    const project: IProject | undefined = stateManager.getProject(projectId)
     const tags: string[] = []
 
     tagsIds.forEach(id => tags.push(id));
 
-    if (!project)
-      return;
+    stateManager.updateTodo(todo, title, description, date, priority, projectId, tags)
 
-    // TODO: after update generate more copies of Todo object, so updating add!!
-
-    stateManager.updateTodo(project.id, id, title, description, date, priority, projectId, tags)
-
-    stateManager.setSelectedProject(project.id)
+    stateManager.setSelectedProject(projectId)
     navHtmlElement.classList.remove('hidden')
     mainHtmlElement.classList.remove('blur')
   }

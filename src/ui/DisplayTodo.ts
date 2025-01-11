@@ -52,6 +52,7 @@ function CreateTagHtml(id: string): HTMLDivElement {
 
   tagHtml.style.background = tagObject?.color || 'black'
   tagHtml.textContent = tagObject?.name || 'trying'
+  tagHtml.classList.add('tag')
 
   return tagHtml
 }

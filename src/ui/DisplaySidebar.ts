@@ -45,6 +45,7 @@ function displayAddProjectButton(stateManager: IStateManager) {
   const newProjectButton = document.createElement('button')
 
   newProjectButton.textContent = `New Project`
+  newProjectButton.classList.add('new-button')
   newProjectButton.addEventListener('click', () => {
     interactionHandler.addProject()
     displayMain(stateManager)

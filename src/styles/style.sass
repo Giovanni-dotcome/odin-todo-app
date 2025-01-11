@@ -1,43 +1,8 @@
-// TODO: REFACTOR ALL THE SASS FILE, INTO MODULES AND AVOID REDUNDANCIES
-.tag-button
-    opacity: 0.5
-    &:hover
-       transform: scale(1.05)
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+@use 'todo'
+@use 'nav'
+@use 'buttons'
+@use 'sidebar'
 
-.tag-checked
-    opacity: 1
-
-nav
-  padding: 1rem 2rem
-  margin: 0
-ul
-  padding: 0
-  li
-    margin: 0.5rem 0
-
-#todosList
-  display: flex
-  justify-content: center // Centers child elements horizontally
-  align-items: center // Centers child elements vertically
-  width: 360px // Match the width of a `.todo` element
-  margin: 1rem auto // Center the container horizontally and add spacing
-  padding: 1rem // Add padding for consistent spacing
-
-.new-todo-button
-  font-size: 16px
-  font-weight: bold
-  background-color: #1e88e5
-  border-radius: 24px
-  padding: 0.75rem 2rem
-  color: #ffffff
-  border: none
-  cursor: pointer
-  transition: transform 0.2s ease, background-color 0.3s ease
-  text-align: center
-  &:hover
-    transform: scale(1.1)
-    background-color: #1565c0
 body
   margin: 0
   font-family: 'Roboto', sans-serif
@@ -54,175 +19,10 @@ body
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
   border-radius: 8px
   overflow: hidden
-  nav
-    width: 290px
-    background-color: #2c2c2c
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.5)
-    color: #b0bec5
-    li
-      display: flex
-      justify-content: space-between
-      align-items: center
-      padding: 10px
-      font-size: 14px
-      cursor: pointer
-      transition: background-color 0.2s ease
-      &:hover
-        background-color: #37474f
-      > *
-        border: none
   main
     min-width: 300px
     flex-grow: 1
     padding: 1rem
-
-.todo
-  display: flex
-  flex-direction: row
-  justify-content: flex-start
-  align-items: stretch 
-  background-color: #2e2e2e
-  color: #e0e0e0
-  width: 360px
-  height: 100%
-  padding: 1rem
-  border-radius: 8px
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5)
-  transition: transform 0.2s ease, box-shadow 0.2s ease
-  &:hover
-    cursor: pointer
-    transform: translateY(-4px)
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6)
-  > *
-    width: 100%
-
-  .div
-    display: flex
-  .upperDiv
-    justify-content: space-between
-    display: flex
-    width: 100%
-    flex-grow: 1
-
-  .rightDiv
-    display: flex
-    gap: 0.5rem
-    justify-content: center
-    align-items: center
-  .priority
-    width: 0.5rem
-    flex-grow: 0
-    flex-shrink: 0
-    border-radius: 4px
-    margin-right: 1rem
-
-  .content
-    flex-grow: 1
-    font-size: 16px
-    font-weight: 500
-    color: #e0e0e0
-
-  .due-date
-    font-size: 14px
-    color: #b0bec5
-
-  .tags
-    margin-top: 10px
-    justify-content: flex-end
-    display: flex
-    gap: 8px
-    flex-wrap: wrap
-    .tag
-      font-weight: bold
-      font-size: 12px
-      padding: 3px 6px
-      border-radius: 4px
-      color: #e0e0e0
-
-#todosList
-  display: flex
-  flex-direction: column
-  gap: 1.5rem
-  padding: 2rem
-
-button
-  display: inline-block
-  padding: 0.5rem 1.5rem
-  font-size: 14px
-  color: #ffffff
-  background-color: #1e88e5
-  border: none
-  border-radius: 24px
-  cursor: pointer
-  transition: background-color 0.2s ease, transform 0.2s ease
-  &:hover
-    background-color: #1565c0
-    transform: scale(1.05)
-
-#addTodo button
-  font-size: 16px
-  font-weight: bold
-  background-color: #1e88e5
-  border-radius: 24px
-  padding: 0.75rem 2rem
-  transition: transform 0.2s ease, background-color 0.3s ease
-  &:hover
-    transform: scale(1.1)
-    background-color: #1565c0
-
-#sidebar
-  position: fixed
-  top: 0
-  right: -350px
-  width: 300px
-  height: 100%
-  background-color: #2c2c2c
-  color: #e0e0e0
-  transition: right 0.3s ease
-  z-index: 2
-  padding: 20px
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.5)
-  > *
-    margin-bottom: 3rem
-
-#sidebar .tag-container
-  gap: 0.5rem
-  display: flex
-  flex-wrap: wrap
-  gap: 8px
-  .tag
-    opacity: 0.5
-    background-color: #455a64
-    color: white
-    font-size: 12px
-    padding: 6px 12px
-    border-radius: 16px
-    cursor: pointer
-    transition: transform 0.2s ease, background-color 0.2s ease
-    &:hover
-      transform: scale(1.1)
-      background-color: #607d8b
-
-main .tag
-  background-color: #37474f
-  border: none
-  color: white
-  font-size: 0.75rem
-  align-items: center
-  padding: 4px
-  border-radius: 4px
-
-#sidebar button
-  background-color: #37474f
-  align-items: center
-  border: none
-  color: white
-  padding: 10px
-  cursor: pointer
-  border-radius: 4px
-  transition: background-color 0.2s ease
-  &:hover
-    background-color: #455a64
 
 .overlay
   position: fixed
@@ -240,3 +40,6 @@ main .tag
 
 .visible
   visibility: visible
+
+.tag-checked
+    opacity: 1

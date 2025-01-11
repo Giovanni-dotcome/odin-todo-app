@@ -13,12 +13,13 @@ const StateManager = () => {
     return projects;
   }
 
+  // TODO: check if necessary, is used in addTodo, to put the project object in the todo. but I suspect the project todo is useless in the todo object
   function getProject(id: string): IProject {
-    Object.keys(localStorage).forEach(key => {
+    for (const key of Object.keys(localStorage)) {
       const project: IProject = JSON.parse(localStorage.getItem(key) || '{}')
       if (project.id === id)
         return project
-    })
+    }
     return getDefaultProject();
   }
 

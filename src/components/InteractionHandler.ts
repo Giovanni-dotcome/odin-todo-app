@@ -65,7 +65,8 @@ const InteractionHandler = (stateManager: IStateManager) => {
     if (!project)
       return;
 
-    stateManager.addTodo(project.id, Todo(title, description, new Date(date), priority, project, tags))
+    // TODO: check if you really need the project object in the todo object, is used in the object constructor below
+    stateManager.addTodo(projectId, Todo(title, description, new Date(date), priority, project, tags))
     stateManager.setSelectedProject(project.id)
     navHtmlElement.classList.remove('hidden')
     mainHtmlElement.classList.remove('blur')

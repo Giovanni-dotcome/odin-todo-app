@@ -34,11 +34,6 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
   }
 
   addTodobuttonElement.addEventListener('click', () => {
-    console.log(`titleHtml: ${titleHtml.value}`)
-    console.log(`descriptionHtml: ${descriptionHtml.value}`)
-    console.log(`dueDateHtml: ${dueDateHtml.value}`)
-    console.log(`priorityHtml: ${priorityHtml.value}`)
-    console.log(`projectHtml: ${projectHtml.value}`)
 
     if (todo === undefined) {
       interactionHandler.addTodo(
@@ -47,7 +42,7 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
         dueDateHtml.value,
         priorityHtml.value,
         projectHtml.value,
-        document.querySelectorAll('.tag-button')
+        [...document.querySelectorAll('.tag-checked')].map(element => element.id),
       )
     }
     else {
@@ -58,7 +53,7 @@ export default function displayPopup(stateManager: IStateManager, todo?: ITodo) 
         dueDateHtml.value,
         priorityHtml.value,
         projectHtml.value,
-        document.querySelectorAll('.tag-button')
+        [...document.querySelectorAll('.tag-checked')].map(element => element.id),
       )
     }
 

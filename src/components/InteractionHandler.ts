@@ -30,17 +30,12 @@ const InteractionHandler = (stateManager: IStateManager) => {
     date: string, // TODO: this date is not safe to update without any check, try to create a single function to handle dates (a template is in IsoDate.ts)
     priority: string,
     projectId: string,
-    tagsNodeList: NodeListOf<Element>
+    tagsIds: string[],
   ) {
     const project: IProject | undefined = stateManager.getProject(projectId)
     const tags: string[] = []
 
-    tagsNodeList.forEach(element => {
-      if (element.classList.contains('tag-checked')) {
-        const id = (element as HTMLElement).id
-        tags.push(id)
-      }
-    });
+    tagsIds.forEach(id => tags.push(id));
 
     if (!project)
       return;
@@ -60,17 +55,12 @@ const InteractionHandler = (stateManager: IStateManager) => {
     date: string,
     priority: string,
     projectId: string,
-    tagsNodeList: NodeListOf<Element>
+    tagIds: string[]
   ) {
     const project: IProject | undefined = stateManager.getProject(projectId)
     const tags: string[] = []
 
-    tagsNodeList.forEach(element => {
-      if (element.classList.contains('tag-checked')) {
-        const id = (element as HTMLElement).id
-        tags.push(id)
-      }
-    });
+    tagIds.forEach(id => tags.push(id));
 
     if (!project)
       return;

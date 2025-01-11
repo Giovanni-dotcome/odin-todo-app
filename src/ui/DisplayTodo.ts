@@ -50,9 +50,11 @@ function CreateTagHtml(id: string): HTMLDivElement {
   const tagHtml = document.createElement('div')
   const tagObject = TagsList.find(tag => tag.id === id)
 
-  tagHtml.style.background = tagObject?.color || ''
-  tagHtml.textContent = tagObject?.name || ''
+  tagHtml.style.background = tagObject?.color || 'black'
+  tagHtml.textContent = tagObject?.name || 'trying'
 
+  TagsList.forEach(tag => console.log(`tagListid: ${tag.id} `))
+  console.log(`id in the todo tag:${id} `)
   return tagHtml
 }
 
@@ -82,6 +84,7 @@ function createupperDivHtmlElement(
 
   return upperDivHtmlElement
 }
+
 function updateTodo(todo: ITodo, stateManager: IStateManager) {
   displayPopup(stateManager, todo)
 }
